@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="undefined">
+  
+    <link rel="icon" href="/images/basketball.ico">
+  
+    
+  <title>Node.js在游戏服务器的应用(一) | 酱鲍的博客</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>酱鲍的博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>Node.js在游戏服务器的应用(一)</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017年07月11日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/后端技术/">后端技术</a>
+  </div>
+
+
+
+            
+            
+              | 
+                  <i class="fa fa-tag" aria-hidden="true"></i>
+                
+               
+  <a href="/tags/#Node.js" class='tag'>Node.js</a>
+
+
+            
+          </div>
+          <p>凭借着异步事件模型和V8的强势性能，Node.js在后端领域的应用相当活跃，在游戏领域的应用也是很有意义，给传统的游戏服务器开发带来了新的解决方案。虽然相比传统的C++、java类游戏服务器，可能还存在着性能调优、解决方案成熟性、健壮性等一些问题，但是Node.js的异步事件模型在I/O密集型的网络游戏应用中表现不俗，也带来了更加精简而快速的游戏开发体验。</p>
+<p>简单记录自己游戏开发过程中应用Node.js的经验</p>
+<a id="more"></a>
+<h2 id="关于游戏服务器"><a href="#关于游戏服务器" class="headerlink" title="关于游戏服务器"></a>关于游戏服务器</h2><p>游戏服务器相比web服务器，在逻辑复杂性、通信量、实时性方面会有更高要求。一些常见区别：</p>
+<ul>
+<li>web应用多为短连接，而游戏应用需要长连接保证实时性</li>
+<li>交互上：B/S更多关注某个用户和服务器交互，正确响应，游戏应用还会涉及很多广播消息，场景内消息同步等</li>
+<li>游戏应用连接状态更为复杂，应用长连接和网络的复杂性，需要考虑断线重连、恢复现场等复杂场景</li>
+<li>游戏玩家状态数据变化很频繁，缓存、数据持久化、安全检验设计需谨慎</li>
+</ul>
+<p>几种常见的游戏服务器架构：</p>
+<ol>
+<li>单进程服务器<br><img src="http://7xq0qv.com1.z0.glb.clouddn.com/singleProcess.png" alt="单进程服务器"><br>简单来说就是把socket服务、聊天服务、游戏逻辑等全塞到一个进程去处理，最简单甚至就可以用<a href="https://github.com/socketio/socket.io" target="_blank" rel="noopener">socket.io</a>搭一个websocket服务器，接收到消息时丢给逻辑处理模块去处理。实现非常简单，但是承载用户量不大，实时性不高，后期拓展也很困难。</li>
+<li>多进程服务器<br><img src="http://7xq0qv.com1.z0.glb.clouddn.com/multiProcess.png" alt="多进程服务器"><br>各个进程分工明确（承载连接、聊天、战斗等），进程间通过RPC或其它协议通信，各场景相互独立，对很对分区分服游戏是比较理想的方式。但场景服务器过载时动态拓展服务器比较困难。</li>
+<li>分布式服务器<br><img src="http://7xq0qv.com1.z0.glb.clouddn.com/distribute.png" alt="分布式服务器"><br>和多进程服务器类似，各个进程服务器明确分工，进程间远程调用通信，但是服务器内部用master来集中管理所有服务器，实时观察负载状态，动态拓展性很强，但分布式带来的也是比较高的复杂度，部署在不同机子上的服务器进程状态同步、AOI设计等。所以还是应该根据产品需求有取舍地选择服务器架构，愉快做游戏开发。</li>
+</ol>
+<h2 id="用过的Node-js游戏服务器架构"><a href="#用过的Node-js游戏服务器架构" class="headerlink" title="用过的Node.js游戏服务器架构"></a>用过的Node.js游戏服务器架构</h2><p><a href="https://github.com/NetEase/pomelo" target="_blank" rel="noopener">pomelo</a>是基于Node.js的轻量级分布式服务器架构，以前项目中基于pomelo做了服务端的设计如下图（每个绿色模块都是一个服务器进程）：</p>
+<p><img src="http://7xq0qv.com1.z0.glb.clouddn.com/gameServerSystem.png" alt="基于pomelo的游戏服务器架构"><br>主要包括三部分：</p>
+<ul>
+<li>login server：登录认证服务器，主要负责登录验证，第三方渠道账号校验，使用express构建的http服务</li>
+<li>game server： 游戏服核心，主要由前端服务、后端服务、master服务、数据层服务组成<br>前端服务(连接层)由gate和connector组成，gate负责负载均衡，connector hold住所有连接，后端服务包括战斗服务器、邮件服务器、聊天服务器……master服务监控整个服务器群状态。<br>基本的请求-响应流程：从登录服拿到服务器gate地址和登录token后，连上gate，gate返回合适的connector地址，客户端连上connector，connector会向login server做安全校验，校验成功则hold住连接，玩家绑定到相应channel，至此登录完成。客户端可以发起某个请求，connector收到请求后，根据自定义router将请求路由到相应服务器进程处理，后端服务器将处理结果返回connector，connector响应客户端，完成一次请求过程。</li>
+<li>admin server：后台服务器，跟game server中master交互，获取服务器当前运行、负载状态，使用express构建的可视化管理工具。</li>
+</ul>
+<p>这就是自己用Node.js构建游戏服务器的简单应用，抛开传统服务器的繁琐配置，开发体验比较愉快，但也有不少痛点，后面继续记录详细设计和踩过的坑</p>
+
+        </section>
+    </article> 
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于游戏服务器"><span class="toc-number">1.</span> <span class="toc-text">关于游戏服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用过的Node-js游戏服务器架构"><span class="toc-number">2.</span> <span class="toc-text">用过的Node.js游戏服务器架构</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+<!-- disqus 公共JS代码 -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES * * */
+  var disqus_shortname = "your_disqus_shortname";
+  var disqus_identifier = "https://jiangbao.github.io/2017/07/11/Node.js在游戏服务器的应用-一/";
+  var disqus_url = "https://jiangbao.github.io/2017/07/11/Node.js在游戏服务器的应用-一/";
+
+  isAgent(getDisqus)
+
+  // determine user agent in China
+  function isAgent(cb) {
+    var url = '//graph.facebook.com/feed?callback=h';
+    var xhr = new XMLHttpRequest();
+    var called = false;
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+      called = true;
+      cb(true);
+      }
+    };
+    xhr.send();
+    // timeout 1s, this facebook API is very fast.
+    setTimeout(function() {
+      if (!called) {
+      xhr.abort();
+      cb(false)
+      }
+    }, 1000);
+  }
+
+  function getDisqus(isAgent) {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; 
+    dsq.async = true
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+  }
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+<script type="text/javascript">
+  (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+
+      if (typeof LivereTower === 'function') { return; }
+
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+
+      e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | <a href="https://github.com/JiangBao" target="_blank">JiangBao<酱鲍></a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
