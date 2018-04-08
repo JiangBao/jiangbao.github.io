@@ -1,99 +1,296 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="undefined">
+<!doctype html>
+
+
+
   
-    <link rel="icon" href="/images/basketball.ico">
-  
-    
-  <title>前端异常监控 | 酱鲍的博客</title>
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="性能," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/basketball.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="开发过程中，有不少bug能够逃过各种test、QA、review，最终出现在线上，对于线上bug，如果没有足够的log分析，那会大大增加定位时间。所以不论前后端开发，日志系统都是必不可少的一个环节。前端日志系统不像后端有比较成熟统一的解决方案，对于前端异常日志的处理通常采用前端埋点或其它异常捕获方式收集错误日志，然后提交给服务器持久化。">
+<meta name="keywords" content="性能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端异常监控">
+<meta property="og:url" content="http://yoursite.com/2017/06/21/前端异常监控/index.html">
+<meta property="og:site_name" content="JiangBao&#39;s Blog">
+<meta property="og:description" content="开发过程中，有不少bug能够逃过各种test、QA、review，最终出现在线上，对于线上bug，如果没有足够的log分析，那会大大增加定位时间。所以不论前后端开发，日志系统都是必不可少的一个环节。前端日志系统不像后端有比较成熟统一的解决方案，对于前端异常日志的处理通常采用前端埋点或其它异常捕获方式收集错误日志，然后提交给服务器持久化。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://7xq0qv.com1.z0.glb.clouddn.com/ErrorEventSupport.png">
+<meta property="og:image" content="http://7xq0qv.com1.z0.glb.clouddn.com/scriptError.png">
+<meta property="og:updated_time" content="2018-04-08T08:47:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端异常监控">
+<meta name="twitter:description" content="开发过程中，有不少bug能够逃过各种test、QA、review，最终出现在线上，对于线上bug，如果没有足够的log分析，那会大大增加定位时间。所以不论前后端开发，日志系统都是必不可少的一个环节。前端日志系统不像后端有比较成熟统一的解决方案，对于前端异常日志的处理通常采用前端埋点或其它异常捕获方式收集错误日志，然后提交给服务器持久化。">
+<meta name="twitter:image" content="http://7xq0qv.com1.z0.glb.clouddn.com/ErrorEventSupport.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 前端异常监控 | JiangBao's Blog </title>
 </head>
 
-<body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/">
-      <span>酱鲍的博客</span>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">JiangBao's Blog</span>
+      <span class="logo-line-after"><i></i></span>
     </a>
-    <ul class="right-header">
+  </div>
+  <p class="site-subtitle">南乡佬</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
       
-        <li class="nav-item">
-          
-            <a href="/" class="item-link">首页</a>
-          
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
         </li>
       
-        <li class="nav-item">
-          
-            <a href="/about" class="item-link">关于</a>
-          
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            文章
+          </a>
         </li>
       
-        <li class="nav-item">
-          
-            <a href="/archives" class="item-link">归档</a>
-          
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
         </li>
       
-        <li class="nav-item">
-          
-            <a href="/tags" class="item-link">标签</a>
-          
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
         </li>
+      
+
       
     </ul>
-  </div>
-</header>
+  
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>前端异常监控</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017年06月21日</time>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
             
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/前端技术/">前端技术</a>
-  </div>
 
+  <div id="posts" class="posts-expand">
+    
 
+  
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
             
             
-              | 
-                  <i class="fa fa-tag" aria-hidden="true"></i>
+              
+                前端异常监控
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-21T10:37:55+08:00" content="2017-06-21">
+              2017-06-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端技术/" itemprop="url" rel="index">
+                    <span itemprop="name">前端技术</span>
+                  </a>
+                </span>
+
                 
-               
-  <a href="/tags/#性能" class='tag'>性能</a>
+                
+
+              
+            </span>
+          
+
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
 
 
-            
-          </div>
-          <p>开发过程中，有不少bug能够逃过各种test、QA、review，最终出现在线上，对于线上bug，如果没有足够的log分析，那会大大增加定位时间。所以不论前后端开发，日志系统都是必不可少的一个环节。前端日志系统不像后端有比较成熟统一的解决方案，对于前端异常日志的处理通常采用前端埋点或其它异常捕获方式收集错误日志，然后提交给服务器持久化。</p>
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>开发过程中，有不少bug能够逃过各种test、QA、review，最终出现在线上，对于线上bug，如果没有足够的log分析，那会大大增加定位时间。所以不论前后端开发，日志系统都是必不可少的一个环节。前端日志系统不像后端有比较成熟统一的解决方案，对于前端异常日志的处理通常采用前端埋点或其它异常捕获方式收集错误日志，然后提交给服务器持久化。</p>
 <a id="more"></a>
 <h2 id="异常捕获"><a href="#异常捕获" class="headerlink" title="异常捕获"></a>异常捕获</h2><p>js的异常机制并不如其它编译型语言严谨，比如java中对可检查异常需要强制捕获处理，而js代码可能就会在运行时才发现有个异常直接导致线程终止。所以在js项目中，更需要对异常捕获机制有统一约定，一般来说基本方法有几种：</p>
 <ol>
 <li><p>直接捕获<br>对于很明确的某些达到约定异常条件的（接口返回状态不对，客户端认证异常等），直接捕获提交服务端，在可预测范围内反馈异常并记录，比如：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">asyncRequest((data) =&gt; &#123;</span><br><span class="line"></span><br><span class="line"> // 接口返回的数据不在约定范围内，直接捕获提交</span><br><span class="line"> if (data !== &apos;someValue&apos;) &#123;</span><br><span class="line">   reportToServer(&#123;</span><br><span class="line">     // error message</span><br><span class="line">   &#125;);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">asyncRequest((data) =&gt; &#123;</span><br><span class="line"></span><br><span class="line"> // 接口返回的数据不在约定范围内，直接捕获提交</span><br><span class="line"> if (data !== &apos;someValue&apos;) &#123;</span><br><span class="line">   reportToServer(&#123;</span><br><span class="line">     // error message</span><br><span class="line">   &#125;);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>try...catch</code><br>java中如果某段代码可能抛出<code>checked Exception</code>，那么就需要强制在外层加上<code>try...catch</code>，类似于这样的处理机制，js中，在有可能抛出异常的地方，使用<code>try...catch</code>进行异常捕获处理，比如，对于一个有可能为undefined的数组参数arr，常规处理和try..catch方式对比：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// normal</span><br><span class="line">// 会报TypeError: Cannot read property &apos;length&apos; of undefined错误，并且线程终止</span><br><span class="line">doSomething(a.length);</span><br><span class="line">doOtherthings();</span><br><span class="line">// try...catch</span><br><span class="line">try &#123;</span><br><span class="line"> doSomething(a.length);</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line"> reportToServer(e);</span><br><span class="line"> console.log(&apos;HaHa, I catch the error&apos;);</span><br><span class="line">&#125;</span><br><span class="line">doOtherthings();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// normal</span><br><span class="line">// 会报TypeError: Cannot read property &apos;length&apos; of undefined错误，并且线程终止</span><br><span class="line">doSomething(a.length);</span><br><span class="line">doOtherthings();</span><br><span class="line">// try...catch</span><br><span class="line">try &#123;</span><br><span class="line"> doSomething(a.length);</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line"> reportToServer(e);</span><br><span class="line"> console.log(&apos;HaHa, I catch the error&apos;);</span><br><span class="line">&#125;</span><br><span class="line">doOtherthings();</span><br></pre></td></tr></table></figure>
 <p><code>try...catch</code>可以有效捕获<strong>同步</strong>代码中有可能出现异常的问题，避免程序因异常挂掉。但也仅限于<code>try...catch</code>区块内同步执行的代码，对于异步和全局的错误，<code>try...catch</code>是无能为力的，下面的例子中，<code>try...catch</code>是无法捕获到异步代码中抛出的错误的：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// async</span><br><span class="line">try &#123;</span><br><span class="line"> setTimeout(() =&gt; &#123;</span><br><span class="line">   doSomething(arr.length);</span><br><span class="line"> &#125;, 2000);</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line"> reportToServer(e);</span><br><span class="line"> console.log(&apos;HaHa, I catch the error&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// async</span><br><span class="line">try &#123;</span><br><span class="line"> setTimeout(() =&gt; &#123;</span><br><span class="line">   doSomething(arr.length);</span><br><span class="line"> &#125;, 2000);</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line"> reportToServer(e);</span><br><span class="line"> console.log(&apos;HaHa, I catch the error&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>window.onerror</code> / <code>window.addEventListener(&#39;error&#39;)</code><br>对于异步或全局抛出的异常，最为简单粗暴的捕获方式就是<code>window.onerror</code>或监听<code>error</code>事件，<a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror" target="_blank" rel="noopener">这里</a>有关于两这种方法的标准解释（关于不同浏览器对这两种方法实现是否标准还在验证中）。</p>
 <ul>
 <li><p><code>window.onerror</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/*</span><br><span class="line">* @param &#123;String&#125;   message    错误信息</span><br><span class="line">* @param &#123;String&#125;   fileName   出错的文件位置</span><br><span class="line">* @param &#123;Number&#125;   lineNo     出错位置行号</span><br><span class="line">* @param &#123;Number&#125;   colNo      出错位置列号(可能不支持)</span><br><span class="line">* @param &#123;Object&#125;   errObj     错误详细信息(可能不支持)</span><br><span class="line">*/</span><br><span class="line">window.onerror = function (message, fileName, lineNo, colNo, errObj) &#123;</span><br><span class="line">// handle the error</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">* @param &#123;String&#125;   message    错误信息</span><br><span class="line">* @param &#123;String&#125;   fileName   出错的文件位置</span><br><span class="line">* @param &#123;Number&#125;   lineNo     出错位置行号</span><br><span class="line">* @param &#123;Number&#125;   colNo      出错位置列号(可能不支持)</span><br><span class="line">* @param &#123;Object&#125;   errObj     错误详细信息(可能不支持)</span><br><span class="line">*/</span><br><span class="line">window.onerror = function (message, fileName, lineNo, colNo, errObj) &#123;</span><br><span class="line">// handle the error</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>window.addEventListener(&#39;error)</code><br>监听<code>error</code>事件时，只有一个<code>ErrorEvent</code>事件参数，继承自<code>Event</code>，包含以下属性：</p>
 <ul>
@@ -112,7 +309,7 @@
 <ul>
 <li>在<code>script</code>标签中加入<code>crossorigin</code>属性</li>
 <li><p>响应头增加<code>Access-Control-Allow-Origin</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Access-Control-Allow-Origin: *</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: *</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="上报方式"><a href="#上报方式" class="headerlink" title="上报方式"></a>上报方式</h2><p>常使用的方式有两种：</p>
@@ -133,144 +330,421 @@
 <li><a href="http://www.cnblogs.com/hustskyking/p/fe-monitor.html" target="_blank" rel="noopener">前端代码异常日志收集与监控</a></li>
 </ul>
 
-        </section>
-    </article> 
-  </div>
-  <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#异常捕获"><span class="toc-number">1.</span> <span class="toc-text">异常捕获</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Script-error-错误日志"><span class="toc-number">2.</span> <span class="toc-text">Script error.错误日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上报方式"><span class="toc-number">3.</span> <span class="toc-text">上报方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#压缩混淆的线上代码"><span class="toc-number">4.</span> <span class="toc-text">压缩混淆的线上代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考："><span class="toc-number">4.1.</span> <span class="toc-text">参考：</span></a></li></ol></li></ol>
-        </div>
+      
     </div>
-    
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/性能/" rel="tag">#性能</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/11/Node.js在游戏服务器的应用-一/" rel="prev" title="Node.js在游戏服务器的应用(一)">
+                Node.js在游戏服务器的应用(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/super-man.jpg"
+               alt="酱鲍" />
+          <p class="site-author-name" itemprop="name">酱鲍</p>
+          <p class="site-description motion-element" itemprop="description">野路子程序员，佛系人生玩家</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JiangBao" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#异常捕获"><span class="nav-number">1.</span> <span class="nav-text">异常捕获</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Script-error-错误日志"><span class="nav-number">2.</span> <span class="nav-text">Script error.错误日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上报方式"><span class="nav-number">3.</span> <span class="nav-text">上报方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩混淆的线上代码"><span class="nav-number">4.</span> <span class="nav-text">压缩混淆的线上代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考："><span class="nav-number">4.1.</span> <span class="nav-text">参考：</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
   </aside>
-</main>
 
-<!-- disqus 公共JS代码 -->
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <a class="author" itemprop="copyrightHolder" href="https://github.com/JiangBao">酱鲍</a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
 <script type="text/javascript">
-  /* * * CONFIGURATION VARIABLES * * */
-  var disqus_shortname = "your_disqus_shortname";
-  var disqus_identifier = "https://jiangbao.github.io/2017/06/21/前端异常监控/";
-  var disqus_url = "https://jiangbao.github.io/2017/06/21/前端异常监控/";
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
-  isAgent(getDisqus)
 
-  // determine user agent in China
-  function isAgent(cb) {
-    var url = '//graph.facebook.com/feed?callback=h';
-    var xhr = new XMLHttpRequest();
-    var called = false;
-    xhr.open('GET', url);
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-      called = true;
-      cb(true);
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
       }
     };
-    xhr.send();
-    // timeout 1s, this facebook API is very fast.
-    setTimeout(function() {
-      if (!called) {
-      xhr.abort();
-      cb(false)
-      }
-    }, 1000);
-  }
-
-  function getDisqus(isAgent) {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; 
-    dsq.async = true
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
-  }
-</script>
-<!-- disqus 公共JS代码 end -->
-
-
-<script type="text/javascript">
-  (function(d, s) {
-      var j, e = d.getElementsByTagName(s)[0];
-
-      if (typeof LivereTower === 'function') { return; }
-
-      j = d.createElement(s);
-      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-      j.async = true;
-
-      e.parentNode.insertBefore(j, e);
-  })(document, 'script');
-</script>
-
-
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2018 | <a href="https://github.com/JiangBao" target="_blank">JiangBao<酱鲍></a>
-    </div>
-  </div>
-</footer>
-
-
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/lib/in-view.min.js"></script>
-<script src="/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
-
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
-
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
   });
-
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
-      
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
-
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
-
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
-
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
-  }
 </script>
-<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
 
 
 </body>
