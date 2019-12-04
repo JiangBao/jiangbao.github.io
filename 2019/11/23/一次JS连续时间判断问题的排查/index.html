@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="思考," />
+  <meta name="keywords" content="JavaScript," />
 
 
 
@@ -57,18 +57,18 @@
 
 
 
-<meta name="keywords" content="思考">
+<meta name="description" content="最近接手的一个业务，历史遗留下关于连续登录天数功能的bug，历史代码有一项判断是否连续登录天数的逻辑，正好复习一下JS关于时间的操作。">
+<meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于技术债务">
-<meta property="og:url" content="http://yoursite.com/2019/09/04/关于技术债务/index.html">
+<meta property="og:title" content="一次JS连续时间判断问题的排查">
+<meta property="og:url" content="http://yoursite.com/2019/11/23/一次JS连续时间判断问题的排查/index.html">
 <meta property="og:site_name" content="酱鲍的博客">
+<meta property="og:description" content="最近接手的一个业务，历史遗留下关于连续登录天数功能的bug，历史代码有一项判断是否连续登录天数的逻辑，正好复习一下JS关于时间的操作。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/0_UgM_NuSckeEPqYg_.jpeg">
-<meta property="og:image" content="https://ss.csdn.net/p?http://mmbiz.qpic.cn/mmbiz_gif/2A8tXicCG8yka2rcVsmkqPjN4taJfwp3wxQKXe3ibNiadib0xqp2uYXribWiby2WCrXmO4q1CXAibbpugibUNvdA2yuuNQ/0?wx_fmt=gif&wxfrom=5&wx_lazy=1">
-<meta property="og:updated_time" content="2019-09-07T07:08:02.633Z">
+<meta property="og:updated_time" content="2019-12-04T08:57:20.674Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于技术债务">
-<meta name="twitter:image" content="http://yoursite.com/images/0_UgM_NuSckeEPqYg_.jpeg">
+<meta name="twitter:title" content="一次JS连续时间判断问题的排查">
+<meta name="twitter:description" content="最近接手的一个业务，历史遗留下关于连续登录天数功能的bug，历史代码有一项判断是否连续登录天数的逻辑，正好复习一下JS关于时间的操作。">
 
 
 
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title> 关于技术债务 | 酱鲍的博客 </title>
+  <title> 一次JS连续时间判断问题的排查 | 酱鲍的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -214,7 +214,7 @@
             
             
               
-                关于技术债务
+                一次JS连续时间判断问题的排查
               
             
           </h1>
@@ -226,8 +226,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2019-09-04T17:24:08+08:00" content="2019-09-04">
-              2019-09-04
+            <time itemprop="dateCreated" datetime="2019-11-23T13:39:50+08:00" content="2019-11-23">
+              2019-11-23
             </time>
           </span>
 
@@ -272,15 +272,17 @@
       
 
       
-        <p><img src="/images/0_UgM_NuSckeEPqYg_.jpeg" alt="pic"></p>
+        <p>最近接手的一个业务，历史遗留下关于连续登录天数功能的bug，历史代码有一项判断是否连续登录天数的逻辑，正好复习一下JS关于时间的操作。</p>
 <a id="more"></a>
-<p>最近为了解决公司的技术挖坑问题又是拼命熬夜，每一次偿还技术债务的时候总是心里默念傻~。</p>
-<p>创业到现在快一年了，用户量和产品流水都在良好增长，总体而言业务是在良性发展的，但随之而来的是技术得面对历史遗留问题。其实一年时间来说代码💩山还没堆得那么厉害，但是产品初期盲目的追求开发速度还是导致了很多不合适(瞎搞)的设计，随着产品推广和用户质量提高，技术发现维护成本越来越高，甚至已经不能满足当前产品需求。</p>
-<div align="center"><img width="280" height="158" src="https://ss.csdn.net/p?http://mmbiz.qpic.cn/mmbiz_gif/2A8tXicCG8yka2rcVsmkqPjN4taJfwp3wxQKXe3ibNiadib0xqp2uYXribWiby2WCrXmO4q1CXAibbpugibUNvdA2yuuNQ/0?wx_fmt=gif&wxfrom=5&wx_lazy=1"></div>
-
-<p>作为技术，自己在创业初期总是追求着技术上细节，要做完整测试，要有详细的结构设计，各种代码规范…但与产品的博弈中总是败下阵来，作为创业团队，在目前游戏市场下，我们面临很大的生存压力，总是希望快速出原型，快速将产品推向市场，所以开发速度倒逐渐成了团队的第一追求。敏捷开发就光明正大成了不规范开发的遮羞布，经常是在快速推进功能开发和解决现网问题之间疲于奔命。终于还是接受不了这样的工作状态，喊停了开发，着手重构偿还技术债务。</p>
-<p>其实团队最初就并非技术主导型的，自己也潜移默化地接受了更多的产品思维，不再像之前那种痴迷语言、技术优劣之争，更多地能接受技术为工具，以实现功能优先的思想，但在这二者之间的权衡目前还做得不好，甚至有点迷失。</p>
-<p>自我反思还是技能储备还不够，许多场景无法快速给出最优方案，面对创业的生存压力，总想着快速跑起来，却失去了技术最应该做的沉淀。希望接下来保持耐心，沉淀下来，培养自己更成熟的技术能力。</p>
+<p>在之前自己使用过<code>moment</code>库实现过类似功能：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isContinuous</span>(<span class="params">localTime</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> yesterday = moment().subtract(<span class="number">1</span>, <span class="string">'days'</span>).startOf(<span class="string">'day'</span>);</span><br><span class="line">  <span class="keyword">return</span> moment(localTime).isSame(yesterday, <span class="string">'d'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这次接手的代码使用原生JS实现，比较记录的两个时间的连续性，类似：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isContinuous</span>(<span class="params">prevLocalTime, nextLocalTime</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> prevDate = <span class="keyword">new</span> <span class="built_in">Date</span>(prevLocalTime);</span><br><span class="line">  <span class="keyword">let</span> nextDate = <span class="keyword">new</span> <span class="built_in">Date</span>(nextLocalTime);</span><br><span class="line">  nextDate.setDate(nextDate.getDate() - <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">return</span> prevDate.getTime() === nextDate.getTime();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试发现，入参处：前一次登录时间prevLocalTime保存为<code>YYYY-MM-DD</code>的格式，但是作为比较的下次登录时间使用<code>new Date().toLocaleDateString()</code>获取时间日期字符串，所以又是JS比较坑人的时间字符串环节。</p>
+<p>首先看看<code>toLocaleDateString</code>方法获取的入参问题：</p>
+<blockquote>
+<p><code>toLocaleDateString()</code>方法返回该日期对象日期部分的字符串，该字符串格式因不同语言而不同。新增的参数<code>locales</code>和<code>options</code>使程序能够指定使用哪种语言格式化规则，允许定制该方法的表现<code>（behavior）</code>。在旧版本浏览器中，<code>locales</code>和<code>options</code>参数被忽略，使用的语言环境和返回的字符串格式是各自独立实现的。<br>from: <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString" target="_blank" rel="noopener">MDN</a></p>
+</blockquote>
+<p>所以这个方法获取时间日期字符串最大的问题是不同环境下得到的结果是不同的，当获取到<code>YYYY/MM/DD</code>这样的格式，不用于记录中保存的<code>YYYY-MM-DD</code>格式，使用<code>Date</code>对象时，在ES5标准下，没有提供时区的ISO 8601标准字符串都会被默认为标准时区，简而言之，<code>YYYY-MM-DD</code>和<code>YYYY/MM/DD</code>使用Date对象生成的时间字符串是不同的。</p>
+<p>结论：由于<code>toLocaleDateString</code>方法的不可靠性，需要注意获取参数与记录参数保持一致性，此外，仅针对这段判断代码，因为比较前只做了日期的同步，根据<code>Date</code>对象导致的问题，可以额外针对 时、分、秒、毫秒单位进行同步，也可以解决<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isContinuous</span>(<span class="params">prevLocalTime, nextLocalTime</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> prevDate = <span class="keyword">new</span> <span class="built_in">Date</span>(prevLocalTime);</span><br><span class="line">  <span class="keyword">let</span> nextDate = <span class="keyword">new</span> <span class="built_in">Date</span>(nextLocalTime);</span><br><span class="line">  nextDate.setDate(nextDate.getDate() - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  prevDate.setHours(<span class="number">0</span>);</span><br><span class="line">  prevDate.setMinutes(<span class="number">0</span>);</span><br><span class="line">  prevDate.setSeconds(<span class="number">0</span>);</span><br><span class="line">  prevDate.setMilliseconds(<span class="number">0</span>);</span><br><span class="line">  nextDate.setHours(<span class="number">0</span>);</span><br><span class="line">  nextDate.setMinutes(<span class="number">0</span>);</span><br><span class="line">  nextDate.setSeconds(<span class="number">0</span>);</span><br><span class="line">  nextDate.setMilliseconds(<span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">return</span> prevDate.getTime() === nextDate.getTime();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -295,7 +297,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/思考/" rel="tag">#思考</a>
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
           
         </div>
       
@@ -304,17 +306,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/27/Hello, World/" rel="next" title="Hello, World">
-                <i class="fa fa-chevron-left"></i> Hello, World
+              <a href="/2019/09/04/关于技术债务/" rel="next" title="关于技术债务">
+                <i class="fa fa-chevron-left"></i> 关于技术债务
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/23/一次JS连续时间判断问题的排查/" rel="prev" title="一次JS连续时间判断问题的排查">
-                一次JS连续时间判断问题的排查 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
