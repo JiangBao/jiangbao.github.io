@@ -39,7 +39,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JavaScript," />
+  <meta name="keywords" content="生活," />
 
 
 
@@ -55,18 +55,18 @@
 
 
 
-<meta name="description" content="数值运算出错时，比如任何数除以0都会导致错误而终止程序运行，但是在JavaScript中不会影响程序执行，而是会返回一个特殊值–NaN(Not a Number)，表示本来要返回数值的操作数未返回数值的情况。最近在一个使用js开发的项目中，一不小心就踩到了一个关于NaN的坑。">
-<meta name="keywords" content="JavaScript">
+<meta name="description" content="2020年的第一天，找时间调整自己个人博客的托管服务，更新一下博客图片的图床。">
+<meta name="keywords" content="生活">
 <meta property="og:type" content="article">
-<meta property="og:title" content="踩了一个关于NaN的小坑">
-<meta property="og:url" content="http://yoursite.com/2019/01/18/踩了一个关于NaN的小坑/index.html">
+<meta property="og:title" content="调整一下博客托管">
+<meta property="og:url" content="http://yoursite.com/2020/01/01/调整一下博客托管/index.html">
 <meta property="og:site_name" content="酱鲍的博客">
-<meta property="og:description" content="数值运算出错时，比如任何数除以0都会导致错误而终止程序运行，但是在JavaScript中不会影响程序执行，而是会返回一个特殊值–NaN(Not a Number)，表示本来要返回数值的操作数未返回数值的情况。最近在一个使用js开发的项目中，一不小心就踩到了一个关于NaN的坑。">
+<meta property="og:description" content="2020年的第一天，找时间调整自己个人博客的托管服务，更新一下博客图片的图床。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-21T10:49:59.000Z">
+<meta property="og:updated_time" content="2020-01-01T14:03:06.758Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="踩了一个关于NaN的小坑">
-<meta name="twitter:description" content="数值运算出错时，比如任何数除以0都会导致错误而终止程序运行，但是在JavaScript中不会影响程序执行，而是会返回一个特殊值–NaN(Not a Number)，表示本来要返回数值的操作数未返回数值的情况。最近在一个使用js开发的项目中，一不小心就踩到了一个关于NaN的坑。">
+<meta name="twitter:title" content="调整一下博客托管">
+<meta name="twitter:description" content="2020年的第一天，找时间调整自己个人博客的托管服务，更新一下博客图片的图床。">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> 踩了一个关于NaN的小坑 | 酱鲍的博客 </title>
+  <title> 调整一下博客托管 | 酱鲍的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -212,7 +212,7 @@
             
             
               
-                踩了一个关于NaN的小坑
+                调整一下博客托管
               
             
           </h1>
@@ -224,8 +224,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2019-01-18T22:10:33+08:00" content="2019-01-18">
-              2019-01-18
+            <time itemprop="dateCreated" datetime="2020-01-01T20:40:20+08:00" content="2020-01-01">
+              2020-01-01
             </time>
           </span>
 
@@ -238,8 +238,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
+                  <a href="/categories/生活/" itemprop="url" rel="index">
+                    <span itemprop="name">生活</span>
                   </a>
                 </span>
 
@@ -270,18 +270,14 @@
       
 
       
-        <p>数值运算出错时，比如任何数除以0都会导致错误而终止程序运行，但是在JavaScript中不会影响程序执行，而是会返回一个特殊值–<code>NaN(Not a Number)</code>，表示本来要返回数值的操作数未返回数值的情况。最近在一个使用js开发的项目中，一不小心就踩到了一个关于<code>NaN</code>的坑。</p>
+        <p>2020年的第一天，找时间调整自己个人博客的托管服务，更新一下博客图片的图床。</p>
 <a id="more"></a>
-<p>场景大致是一个计算某个道具的价值函数，伪代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 计算配置中某个id的道具价值</span></span><br><span class="line"><span class="keyword">const</span> getValue = <span class="function">(<span class="params">id, num=<span class="number">1</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 假设此处配置表中id道具价值存在</span></span><br><span class="line">  <span class="keyword">const</span> value = CONFIG[id].value;</span><br><span class="line">  <span class="keyword">const</span> totalValue = value * num;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> totalValue;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>道具id-数量kv值由上游提供，获取到道具价值后用于后续运算，后来在日志中发现了后续运算<code>NaN</code>的错误。上游传入的<code>num</code>参数有可能为<code>NaN</code>，最初认为默认赋值后即使上游传入的数量值不对也可有默认值，然后又继续愚蠢地加打印做测试：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getValue = <span class="function">(<span class="params">id, num=<span class="number">1</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> value = CONFIG[id].value;</span><br><span class="line">  <span class="keyword">const</span> totalValue = value * num;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在此处做了检测</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> totalValue != <span class="string">'number'</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(<span class="string">'something error!!!'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> totalValue;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>果然在传入<code>num = NaN</code>时，默认参数赋值没生效，函数返回了<code>NaN</code>，并且也没有打印输出，然后试着用老办法看看：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getValue = <span class="function">(<span class="params">id, num</span>) =&gt;</span> &#123;</span><br><span class="line">  num = num || <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">const</span> value = CONFIG[id].value;</span><br><span class="line">  <span class="keyword">const</span> totalValue = value * num;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> totalValue;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>这个时候，<code>num</code>参数在传入<code>NaN</code>时默认为1就可以生效，很有趣的坑，重新好好复习了一下js语法。总结一下犯的几个错误：</p>
-<ul>
-<li><code>NaN</code>虽然是<code>Not a Number</code>的简写，但它依旧是<code>number</code>type的，所以<code>typeof NaN === &#39;number&#39;</code>  </li>
-<li>ES6的默认参数赋值，看一下解释，指的是：允许在没有值或者<code>undefined</code>被传入时使用默认形参。而<code>NaN</code>确实js中一个真实值，所以之前使用默认参数显然没有达到屏蔽<code>NaN</code>参数的作用  </li>
-<li>一切为了赶进度而放弃编写测试的习惯都是耍流氓，无论怎样，还是没做足够测试导致的问题</li>
-</ul>
-<p>创业阶段，所有事情都在赶着做，自己代码缺乏足够测试，又没有专业QA功能验收，功能就被匆匆丢到线上，真是疲于应付各种线上问题了，希望自己能早点推动团队正常的开发、测试、发布流程。</p>
+<p>原先这个博客用Hexo搭建，部署到Github Pages，站点部署在<a href="https://jiangbao.github.io" target="_blank" rel="noopener">jiangbao.github.io</a>(Hexo+NexT主题的博客已经见了很多，看来挺受欢迎，前端的同学应该很熟悉)，博客的图片使用<a href="https://molunerfinn.com/PicGo/" target="_blank" rel="noopener">PicGo</a>+Github做图床。</p>
+<p>最近受Github影响，博客页龟速加载实在让人难受，所以还是决定把页面托管一份到国内平台，正好之前个人阿里云的服务到期了，在阿里云续费和腾讯云首次优惠之间，贫穷使我选择了将个人业务迁移到腾讯云(实在折腾🙄)，正好来一整套腾讯云产品，所以最后选择了<a href="https://coding.net/" target="_blank" rel="noopener">CODING</a>。</p>
+<p>最后选择coding pages部署站点，PicGo+腾讯云COS做图床，为了方便还将之前<a href="www.u9c8d.com">个人主页www.u9c8d.com</a>映射到了coding页面地址。忙了一下午，<a href="http://jiang_bao.coding.me" target="_blank" rel="noopener">新地址</a>打开速度让整个人都轻松了。翻了一下博客仓库的首次提交还是2017年5月份，快三年了，折腾了几次修改、调整，还是没有好好记录下东西，实在惭愧。</p>
+<blockquote>
+<p>关于个人的域名：由于在各平台，自己首选的名称都是『酱鲍』、『jiangbao』之类，但可惜此域名已被使用，所以自己选了『鲍』的Unicode编码 <code>\u9c8d</code>，虽然识别度不够，但胜在够便宜🤔，够自己折腾了。</p>
+</blockquote>
 
       
     </div>
@@ -296,7 +292,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+            <a href="/tags/生活/" rel="tag">#生活</a>
           
         </div>
       
@@ -305,17 +301,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/08/2018-10-08/" rel="next" title="2018-10-08">
-                <i class="fa fa-chevron-left"></i> 2018-10-08
+              <a href="/2019/12/30/我的2019年/" rel="next" title="我的2019年">
+                <i class="fa fa-chevron-left"></i> 我的2019年
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/19/又踩一个postgreSQL的坑/" rel="prev" title="又踩一个postgreSQL的坑">
-                又踩一个postgreSQL的坑 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
