@@ -232,7 +232,7 @@ $(document).ready(function () {
           e: $(element),
           p: {translateX: translateX},
           o: {
-            duration: 500,
+            duration: 300,
             sequenceQueue: false
           }
         };
@@ -254,7 +254,7 @@ $(document).ready(function () {
     menu: function (integrator) {
       $('.menu-item').velocity('transition.slideDownIn', {
         display: null,
-        duration: 200,
+        duration: 100,
         complete: function () {
           integrator.next();
         }
