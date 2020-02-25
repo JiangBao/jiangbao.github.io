@@ -2,8 +2,10 @@
 
 
 
+  
 
-<html class="theme-next mist">
+
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -72,7 +74,7 @@
     scheme: 'Mist',
     sidebar: "",
     fancybox: true,
-    motion: false,
+    motion: true,
     duoshuo: {
       userId: 0,
       author: '博主'
@@ -215,7 +217,7 @@
       
         
       
-      嗯..! 目前共计 13 篇文章。
+      嗯..! 目前共计 14 篇文章。
     </span>
 
     
@@ -229,6 +231,43 @@
         <div class="collection-title">
           <h2 class="archive-year motion-element" id="archive-year-2020">2020</h2>
         </div>
+      
+      
+
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2020/02/24/关于远程办公/" itemprop="url">
+              
+                <span itemprop="name">关于远程办公</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-02-24T10:45:05+08:00"
+              content="2020-02-24" >
+          02-24
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+    
+
+      
+      
+      
+
       
       
 
@@ -758,7 +797,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -882,6 +921,10 @@
   
 
   
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
   
 
 
