@@ -39,7 +39,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="生活," />
+  <meta name="keywords" content="数据库," />
 
 
 
@@ -55,20 +55,18 @@
 
 
 
-<meta name="description" content="2020-03-14 泡泡七个半月龄">
-<meta name="keywords" content="生活">
+<meta name="description" content="今天将新购买的个人服务器数据库升级MySQL8.0，出现了本地Navicat Premium无法连接的问题。">
+<meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="weekend">
-<meta property="og:url" content="http://www.u9c8d.com/2020/03/14/weekend/index.html">
+<meta property="og:title" content="Connection failed">
+<meta property="og:url" content="http://www.u9c8d.com/2020/03/27/Connection-failed/index.html">
 <meta property="og:site_name" content="酱鲍">
-<meta property="og:description" content="2020-03-14 泡泡七个半月龄">
+<meta property="og:description" content="今天将新购买的个人服务器数据库升级MySQL8.0，出现了本地Navicat Premium无法连接的问题。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/IMG_20200314_095957_014.jpg">
-<meta property="og:updated_time" content="2020-03-14T02:30:36.216Z">
+<meta property="og:updated_time" content="2020-03-27T13:16:02.711Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="weekend">
-<meta name="twitter:description" content="2020-03-14 泡泡七个半月龄">
-<meta name="twitter:image" content="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/IMG_20200314_095957_014.jpg">
+<meta name="twitter:title" content="Connection failed">
+<meta name="twitter:description" content="今天将新购买的个人服务器数据库升级MySQL8.0，出现了本地Navicat Premium无法连接的问题。">
 
 
 
@@ -86,7 +84,7 @@
   };
 </script>
 
-  <title> weekend | 酱鲍 </title>
+  <title> Connection failed | 酱鲍 </title>
   <script>
     var _hmt = _hmt || [];
     (function() {
@@ -233,7 +231,7 @@
             
             
               
-                weekend
+                Connection failed
               
             
           </h1>
@@ -245,8 +243,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2020-03-14T10:21:36+08:00" content="2020-03-14">
-              2020-03-14
+            <time itemprop="dateCreated" datetime="2020-03-27T20:57:40+08:00" content="2020-03-27">
+              2020-03-27
             </time>
           </span>
 
@@ -259,8 +257,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
+                  <a href="/categories/问题归档/" itemprop="url" rel="index">
+                    <span itemprop="name">问题归档</span>
                   </a>
                 </span>
 
@@ -291,13 +289,16 @@
       
 
       
-        <div align="center"><img width="400" height="400" src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/IMG_20200314_095957_014.jpg"></div>
-
-<div align="center"><code>2020-03-14 泡泡七个半月龄</code></div>
-
+        <p>今天将新购买的个人服务器数据库升级MySQL8.0，出现了本地Navicat Premium无法连接的问题。</p>
 <a id="more"></a>
-<p><br></p>
-<div align="center">天气很好的周末，油菜花开得正盛，暖春一到，一切都显得很有生机~~</div>
+<p>第一反应: 是否远程连接未打开或者服务器安全组未设置，检查了远程连接设置以及服务器安全组开放端口，都正常。</p>
+<p>连接提示错误为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MySQL said: Authentication plugin &apos;caching_sha2_password&apos; cannot be loaded: dlopen(/usr/local/lib/plugin/caching_sha2_password.so, 2): image not found</span><br></pre></td></tr></table></figure></p>
+<p>最终发现是因为MySQL8之后加密规则导致的：</p>
+<blockquote>
+<p>MySQL8版本之前之前的加密规则是<code>mysql_native_password</code>，在MySQL8之后，加密规则是<code>caching_sha2_password</code></p>
+</blockquote>
+<p>通过还原登录密码加密规则解决此问题：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> mysql -u root -p</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'password';</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
 
@@ -311,7 +312,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/生活/" rel="tag">#生活</a>
+            <a href="/tags/数据库/" rel="tag">#数据库</a>
           
         </div>
       
@@ -320,17 +321,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/03/2020-03-03-💪/" rel="next" title="2020-03-03 💪">
-                <i class="fa fa-chevron-left"></i> 2020-03-03 💪
+              <a href="/2020/03/14/weekend/" rel="next" title="weekend">
+                <i class="fa fa-chevron-left"></i> weekend
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/03/27/Connection-failed/" rel="prev" title="Connection failed">
-                Connection failed <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
