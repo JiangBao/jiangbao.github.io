@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>思考 on 酱鲍的个人日志</title>
+    <link>https://jiangbao.github.io/tags/%E6%80%9D%E8%80%83/</link>
+    <description>Recent content in 思考 on 酱鲍的个人日志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 24 Feb 2020 10:45:05 +0800</lastBuildDate>
+    
+	<atom:link href="https://jiangbao.github.io/tags/%E6%80%9D%E8%80%83/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>关于远程办公</title>
+      <link>https://jiangbao.github.io/%E5%85%B3%E4%BA%8E%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC/</link>
+      <pubDate>Mon, 24 Feb 2020 10:45:05 +0800</pubDate>
+      
+      <guid>https://jiangbao.github.io/%E5%85%B3%E4%BA%8E%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC/</guid>
+      <description>出于各方面原因，远程办公一直是自己比较理想的工作状态，从2018年底开始，我就开始尝试全时段远程办公，目前为止将近一年半左右的时间，也算是有</description>
+    </item>
+    
+    <item>
+      <title>关于技术债务</title>
+      <link>https://jiangbao.github.io/%E5%85%B3%E4%BA%8E%E6%8A%80%E6%9C%AF%E5%80%BA%E5%8A%A1/</link>
+      <pubDate>Wed, 04 Sep 2019 17:24:08 +0800</pubDate>
+      
+      <guid>https://jiangbao.github.io/%E5%85%B3%E4%BA%8E%E6%8A%80%E6%9C%AF%E5%80%BA%E5%8A%A1/</guid>
+      <description>最近为了解决公司的技术挖坑问题又是拼命熬夜，每一次偿还技术债务的时候总是心里默念傻~。 创业到现在快一年了，用户量和产品流水都在良好增长，总体</description>
+    </item>
+    
+  </channel>
+</rss>

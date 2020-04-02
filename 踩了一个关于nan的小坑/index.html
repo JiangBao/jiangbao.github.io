@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>踩了一个关于NaN的小坑 | 酱鲍的个人日志</title>
+        <meta name="Description" content=""><meta property="og:title" content="踩了一个关于NaN的小坑" />
+<meta property="og:description" content="数值运算出错时，比如任何数除以0都会导致错误而终止程序运行，但是在JavaScript中不会影响程序执行，而是会返回一个特殊值&ndash;NaN(Not a Number)，表示本来要返回数值的操作数未返回数值的情况。最近在一个使用js开发的项目中，一不小心就踩到了一个关于NaN的坑。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiangbao.github.io/%E8%B8%A9%E4%BA%86%E4%B8%80%E4%B8%AA%E5%85%B3%E4%BA%8Enan%E7%9A%84%E5%B0%8F%E5%9D%91/" />
+<meta property="article:published_time" content="2019-01-18T22:10:19+08:00" />
+<meta property="article:modified_time" content="2019-01-18T22:10:19+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="踩了一个关于NaN的小坑"/>
+<meta name="twitter:description" content="数值运算出错时，比如任何数除以0都会导致错误而终止程序运行，但是在JavaScript中不会影响程序执行，而是会返回一个特殊值&ndash;NaN(Not a Number)，表示本来要返回数值的操作数未返回数值的情况。最近在一个使用js开发的项目中，一不小心就踩到了一个关于NaN的坑。"/>
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileColor" content="#da532c">
+<link rel="canonical" href="https://jiangbao.github.io/%E8%B8%A9%E4%BA%86%E4%B8%80%E4%B8%AA%E5%85%B3%E4%BA%8Enan%E7%9A%84%E5%B0%8F%E5%9D%91/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="prev" href="https://jiangbao.github.io/2018-10-08/" /><link rel="next" href="https://jiangbao.github.io/%E5%8F%88%E8%B8%A9%E4%B8%80%E4%B8%AApostgresql%E7%9A%84%E5%9D%91/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "踩了一个关于NaN的小坑",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jiangbao.github.io\/%E8%B8%A9%E4%BA%86%E4%B8%80%E4%B8%AA%E5%85%B3%E4%BA%8Enan%E7%9A%84%E5%B0%8F%E5%9D%91\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/jiangbao.github.io\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "JavaScript","wordcount":  798 ,
+        "url": "https:\/\/jiangbao.github.io\/%E8%B8%A9%E4%BA%86%E4%B8%80%E4%B8%AA%E5%85%B3%E4%BA%8Enan%E7%9A%84%E5%B0%8F%E5%9D%91\/","datePublished": "2019-01-18","dateModified": "2019-01-18","publisher": {
+                "@type": "Organization",
+                "name": "酱鲍",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/jiangbao.github.io\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "酱鲍"
+            },"description": ""
+    }
+    </script></head>
+    <body><script>
+            if (!window.localStorage || !window.localStorage.getItem('theme')) {window.isDark = 'dark' === 'dark';} else {
+                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            }
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/">酱鲍的个人日志</a>
+        </div>
+        <div class="menu"><a class="menu-item" href="/posts/" rel="noopener noreffer">文章</a><a class="menu-item" href="/tags/" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" rel="noopener noreffer">分类</a><a class="menu-item" href="/categories/" rel="noopener noreffer">关于</a><span class="menu-item">|</span>
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-wrapper">
+        <div class="header-container">
+            <div class="header-title">
+                <a href="/">酱鲍的个人日志</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="" rel="noopener noreffer">文章</a><a class="menu-item" href="/tags/" title="" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">分类</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+
+<script>
+    window.desktopHeaderMode = "fixed";
+    window.mobileHeaderMode = "auto";
+</script>
+<main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">踩了一个关于NaN的小坑</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/JiangBao" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>酱鲍</a>
+</span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/%E6%8A%80%E6%9C%AF">
+                                <i class="far fa-folder fa-fw"></i>技术
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-01-18>2019-01-18</time>&nbsp;
+                </div>
+        </div><div class="content" id="content"><p>数值运算出错时，比如任何数除以0都会导致错误而终止程序运行，但是在JavaScript中不会影响程序执行，而是会返回一个特殊值&ndash;<code>NaN(Not a Number)</code>，表示本来要返回数值的操作数未返回数值的情况。最近在一个使用js开发的项目中，一不小心就踩到了一个关于<code>NaN</code>的坑。</p>
+<p>场景大致是一个计算某个道具的价值函数，伪代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 计算配置中某个id的道具价值
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">getValue</span> <span class="o">=</span> <span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">num</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 假设此处配置表中id道具价值存在
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">CONFIG</span><span class="p">[</span><span class="nx">id</span><span class="p">].</span><span class="nx">value</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">totalValue</span> <span class="o">=</span> <span class="nx">value</span> <span class="o">*</span> <span class="nx">num</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="nx">totalValue</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>道具id-数量kv值由上游提供，获取到道具价值后用于后续运算，后来在日志中发现了后续运算<code>NaN</code>的错误。上游传入的<code>num</code>参数有可能为<code>NaN</code>，最初认为默认赋值后即使上游传入的数量值不对也可有默认值，然后又继续愚蠢地加打印做测试：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">getValue</span> <span class="o">=</span> <span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">num</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">CONFIG</span><span class="p">[</span><span class="nx">id</span><span class="p">].</span><span class="nx">value</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">totalValue</span> <span class="o">=</span> <span class="nx">value</span> <span class="o">*</span> <span class="nx">num</span><span class="p">;</span>
+
+  <span class="c1">// 在此处做了检测
+</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">totalValue</span> <span class="o">!=</span> <span class="s1">&#39;number&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;something error!!!&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">totalValue</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>果然在传入<code>num = NaN</code>时，默认参数赋值没生效，函数返回了<code>NaN</code>，并且也没有打印输出，然后试着用老办法看看：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">getValue</span> <span class="o">=</span> <span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">num</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">num</span> <span class="o">=</span> <span class="nx">num</span> <span class="o">||</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">CONFIG</span><span class="p">[</span><span class="nx">id</span><span class="p">].</span><span class="nx">value</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">totalValue</span> <span class="o">=</span> <span class="nx">value</span> <span class="o">*</span> <span class="nx">num</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="nx">totalValue</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这个时候，<code>num</code>参数在传入<code>NaN</code>时默认为1就可以生效，很有趣的坑，重新好好复习了一下js语法。总结一下犯的几个错误：</p>
+<ul>
+<li><code>NaN</code>虽然是<code>Not a Number</code>的简写，但它依旧是<code>number</code>type的，所以<code>typeof NaN === 'number'</code></li>
+<li>ES6的默认参数赋值，看一下解释，指的是：允许在没有值或者<code>undefined</code>被传入时使用默认形参。而<code>NaN</code>确实js中一个真实值，所以之前使用默认参数显然没有达到屏蔽<code>NaN</code>参数的作用</li>
+<li>一切为了赶进度而放弃编写测试的习惯都是耍流氓，无论怎样，还是没做足够测试导致的问题</li>
+</ul>
+<p>创业阶段，所有事情都在赶着做，自己代码缺乏足够测试，又没有专业QA功能验收，功能就被匆匆丢到线上，真是疲于应付各种线上问题了，希望自己能早点推动团队正常的开发、测试、发布流程。</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2019-01-18 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/javascript">JavaScript</a></section>
+        <section>
+            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/2018-10-08/" class="prev" rel="prev" title="2018-10-08"><i class="fas fa-angle-left fa-fw"></i>2018-10-08</a>
+            <a href="/%E5%8F%88%E8%B8%A9%E4%B8%80%E4%B8%AApostgresql%E7%9A%84%E5%9D%91/" class="next" rel="next" title="又踩一个postgreSQL的坑">又踩一个postgreSQL的坑<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div class="comment"></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright">
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/JiangBao" target="_blank">酱鲍</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                <span class="icp"><a rel="license external nofollow noopener noreffer" href="http://beian.miit.gov.cn/" target="_blank">浙ICP备20002824号</a></span></div>
+    </div>
+</footer>
+</div><a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
+            <i class="fas fa-chevron-up fa-fw"></i>
+        </a><script>
+        document.addEventListener('DOMContentLoaded', function () {
+            lightGallery(document.getElementById('content'), {
+                selector: '.lightgallery',
+                speed: 400,
+                hideBarsDelay: 2000,
+                thumbnail: true,
+                exThumbImage: 'data-thumbnail',
+                thumbWidth: 80,
+                thumbContHeight: 80,
+            });
+        });
+    </script><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/lg-zoom.min.js"></script><script src="/js/theme.min.js"></script></body>
+</html>

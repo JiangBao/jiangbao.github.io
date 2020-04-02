@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>一次JS连续时间判断问题的排查 | 酱鲍的个人日志</title>
+        <meta name="Description" content=""><meta property="og:title" content="一次JS连续时间判断问题的排查" />
+<meta property="og:description" content="最近接手的一个业务，历史遗留下关于连续登录天数功能的bug，历史代码有一项判断是否连续登录天数的逻辑，正好复习一下JS关于时间的操作。 在之前" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiangbao.github.io/%E4%B8%80%E6%AC%A1js%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4%E5%88%A4%E6%96%AD%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5/" />
+<meta property="article:published_time" content="2019-11-23T13:39:54+08:00" />
+<meta property="article:modified_time" content="2019-11-23T13:39:54+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一次JS连续时间判断问题的排查"/>
+<meta name="twitter:description" content="最近接手的一个业务，历史遗留下关于连续登录天数功能的bug，历史代码有一项判断是否连续登录天数的逻辑，正好复习一下JS关于时间的操作。 在之前"/>
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileColor" content="#da532c">
+<link rel="canonical" href="https://jiangbao.github.io/%E4%B8%80%E6%AC%A1js%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4%E5%88%A4%E6%96%AD%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="prev" href="https://jiangbao.github.io/%E5%85%B3%E4%BA%8E%E6%8A%80%E6%9C%AF%E5%80%BA%E5%8A%A1/" /><link rel="next" href="https://jiangbao.github.io/%E6%88%91%E7%9A%842019%E5%B9%B4/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "一次JS连续时间判断问题的排查",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jiangbao.github.io\/%E4%B8%80%E6%AC%A1js%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4%E5%88%A4%E6%96%AD%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/jiangbao.github.io\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "JavaScript","wordcount":  826 ,
+        "url": "https:\/\/jiangbao.github.io\/%E4%B8%80%E6%AC%A1js%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4%E5%88%A4%E6%96%AD%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5\/","datePublished": "2019-11-23","dateModified": "2019-11-23","publisher": {
+                "@type": "Organization",
+                "name": "酱鲍",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/jiangbao.github.io\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "酱鲍"
+            },"description": ""
+    }
+    </script></head>
+    <body><script>
+            if (!window.localStorage || !window.localStorage.getItem('theme')) {window.isDark = 'dark' === 'dark';} else {
+                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            }
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/">酱鲍的个人日志</a>
+        </div>
+        <div class="menu"><a class="menu-item" href="/posts/" rel="noopener noreffer">文章</a><a class="menu-item" href="/tags/" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" rel="noopener noreffer">分类</a><a class="menu-item" href="/categories/" rel="noopener noreffer">关于</a><span class="menu-item">|</span>
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-wrapper">
+        <div class="header-container">
+            <div class="header-title">
+                <a href="/">酱鲍的个人日志</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="" rel="noopener noreffer">文章</a><a class="menu-item" href="/tags/" title="" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">分类</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+
+<script>
+    window.desktopHeaderMode = "fixed";
+    window.mobileHeaderMode = "auto";
+</script>
+<main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">一次JS连续时间判断问题的排查</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/JiangBao" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>酱鲍</a>
+</span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/%E6%8A%80%E6%9C%AF">
+                                <i class="far fa-folder fa-fw"></i>技术
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-11-23>2019-11-23</time>&nbsp;
+                </div>
+        </div><div class="content" id="content"><p>最近接手的一个业务，历史遗留下关于连续登录天数功能的bug，历史代码有一项判断是否连续登录天数的逻辑，正好复习一下JS关于时间的操作。</p>
+<!-- more -->
+<p>在之前自己使用过<code>moment</code>库实现过类似功能：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">isContinuous</span><span class="p">(</span><span class="nx">localTime</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">yesterday</span> <span class="o">=</span> <span class="nx">moment</span><span class="p">().</span><span class="nx">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;days&#39;</span><span class="p">).</span><span class="nx">startOf</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">moment</span><span class="p">(</span><span class="nx">localTime</span><span class="p">).</span><span class="nx">isSame</span><span class="p">(</span><span class="nx">yesterday</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这次接手的代码使用原生JS实现，比较记录的两个时间的连续性，类似：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">isContinuous</span><span class="p">(</span><span class="nx">prevLocalTime</span><span class="p">,</span> <span class="nx">nextLocalTime</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">prevDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">prevLocalTime</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">nextDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">nextLocalTime</span><span class="p">);</span>
+  <span class="nx">nextDate</span><span class="p">.</span><span class="nx">setDate</span><span class="p">(</span><span class="nx">nextDate</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    
+  <span class="k">return</span> <span class="nx">prevDate</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">===</span> <span class="nx">nextDate</span><span class="p">.</span><span class="nx">getTime</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>测试发现，入参处：前一次登录时间prevLocalTime保存为<code>YYYY-MM-DD</code>的格式，但是作为比较的下次登录时间使用<code>new Date().toLocaleDateString()</code>获取时间日期字符串，所以又是JS比较坑人的时间字符串环节。</p>
+<p>首先看看<code>toLocaleDateString</code>方法获取的入参问题：</p>
+<blockquote>
+<p><code>toLocaleDateString()</code>方法返回该日期对象日期部分的字符串，该字符串格式因不同语言而不同。新增的参数<code>locales</code>和<code>options</code>使程序能够指定使用哪种语言格式化规则，允许定制该方法的表现<code>（behavior）</code>。在旧版本浏览器中，<code>locales</code>和<code>options</code>参数被忽略，使用的语言环境和返回的字符串格式是各自独立实现的。
+from: <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString" target="_blank" rel="noopener noreffer">MDN</a>
+</p>
+</blockquote>
+<p>所以这个方法获取时间日期字符串最大的问题是不同环境下得到的结果是不同的，当获取到<code>YYYY/MM/DD</code>这样的格式，不用于记录中保存的<code>YYYY-MM-DD</code>格式，使用<code>Date</code>对象时，在ES5标准下，没有提供时区的ISO 8601标准字符串都会被默认为标准时区，简而言之，<code>YYYY-MM-DD</code>和<code>YYYY/MM/DD</code>使用Date对象生成的时间字符串是不同的。</p>
+<p>结论：由于<code>toLocaleDateString</code>方法的不可靠性，需要注意获取参数与记录参数保持一致性，此外，仅针对这段判断代码，因为比较前只做了日期的同步，根据<code>Date</code>对象导致的问题，可以额外针对 时、分、秒、毫秒单位进行同步，也可以解决</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">isContinuous</span><span class="p">(</span><span class="nx">prevLocalTime</span><span class="p">,</span> <span class="nx">nextLocalTime</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">prevDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">prevLocalTime</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">nextDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">nextLocalTime</span><span class="p">);</span>
+  <span class="nx">nextDate</span><span class="p">.</span><span class="nx">setDate</span><span class="p">(</span><span class="nx">nextDate</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+
+  <span class="nx">prevDate</span><span class="p">.</span><span class="nx">setHours</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="nx">prevDate</span><span class="p">.</span><span class="nx">setMinutes</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="nx">prevDate</span><span class="p">.</span><span class="nx">setSeconds</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="nx">prevDate</span><span class="p">.</span><span class="nx">setMilliseconds</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="nx">nextDate</span><span class="p">.</span><span class="nx">setHours</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="nx">nextDate</span><span class="p">.</span><span class="nx">setMinutes</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="nx">nextDate</span><span class="p">.</span><span class="nx">setSeconds</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="nx">nextDate</span><span class="p">.</span><span class="nx">setMilliseconds</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    
+  <span class="k">return</span> <span class="nx">prevDate</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">===</span> <span class="nx">nextDate</span><span class="p">.</span><span class="nx">getTime</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2019-11-23 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/javascript">JavaScript</a></section>
+        <section>
+            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E5%85%B3%E4%BA%8E%E6%8A%80%E6%9C%AF%E5%80%BA%E5%8A%A1/" class="prev" rel="prev" title="关于技术债务"><i class="fas fa-angle-left fa-fw"></i>关于技术债务</a>
+            <a href="/%E6%88%91%E7%9A%842019%E5%B9%B4/" class="next" rel="next" title="我的2019年">我的2019年<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div class="comment"></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright">
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/JiangBao" target="_blank">酱鲍</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                <span class="icp"><a rel="license external nofollow noopener noreffer" href="http://beian.miit.gov.cn/" target="_blank">浙ICP备20002824号</a></span></div>
+    </div>
+</footer>
+</div><a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
+            <i class="fas fa-chevron-up fa-fw"></i>
+        </a><script>
+        document.addEventListener('DOMContentLoaded', function () {
+            lightGallery(document.getElementById('content'), {
+                selector: '.lightgallery',
+                speed: 400,
+                hideBarsDelay: 2000,
+                thumbnail: true,
+                exThumbImage: 'data-thumbnail',
+                thumbWidth: 80,
+                thumbContHeight: 80,
+            });
+        });
+    </script><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/lg-zoom.min.js"></script><script src="/js/theme.min.js"></script></body>
+</html>

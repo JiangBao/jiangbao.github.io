@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Node.js on 酱鲍的个人日志</title>
+    <link>https://jiangbao.github.io/tags/node.js/</link>
+    <description>Recent content in Node.js on 酱鲍的个人日志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 13 Jul 2018 22:13:50 +0800</lastBuildDate>
+    
+	<atom:link href="https://jiangbao.github.io/tags/node.js/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Node.js核心模块——Buffer</title>
+      <link>https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97buffer/</link>
+      <pubDate>Fri, 13 Jul 2018 22:13:50 +0800</pubDate>
+      
+      <guid>https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97buffer/</guid>
+      <description>JavaScript语言本身对二进制支持比较欠缺，但在处理类似TCP流或者文件流这样的流数据时，必须使用到二进制，为此，Node.js定义了</description>
+    </item>
+    
+  </channel>
+</rss>
