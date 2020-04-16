@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Node.js核心模块—Buffer | 酱鲍的个人日志</title>
+        <meta name="Description" content=""><meta property="og:title" content="Node.js核心模块—Buffer" />
+<meta property="og:description" content="JavaScript语言本身对二进制支持比较欠缺，但在处理类似TCP流或者文件流这样的流数据时，必须使用到二进制，为此，Node.js定义了" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-buffer/" />
+<meta property="article:published_time" content="2018-07-13T22:13:50+08:00" />
+<meta property="article:modified_time" content="2018-07-13T22:13:50+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Node.js核心模块—Buffer"/>
+<meta name="twitter:description" content="JavaScript语言本身对二进制支持比较欠缺，但在处理类似TCP流或者文件流这样的流数据时，必须使用到二进制，为此，Node.js定义了"/>
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileColor" content="#da532c">
+<link rel="canonical" href="https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-buffer/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="prev" href="https://jiangbao.github.io/%E5%91%A8%E6%9C%AB%E9%9B%A8%E5%A4%A9/" /><link rel="next" href="https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-events/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Node.js核心模块—Buffer",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jiangbao.github.io\/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-buffer\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/jiangbao.github.io\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "Node.js","wordcount":  1101 ,
+        "url": "https:\/\/jiangbao.github.io\/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-buffer\/","datePublished": "2018-07-13","dateModified": "2018-07-13","publisher": {
+                "@type": "Organization",
+                "name": "酱鲍",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/jiangbao.github.io\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "酱鲍"
+            },"description": ""
+    }
+    </script></head>
+    <body><script>
+            if (!window.localStorage || !window.localStorage.getItem('theme')) {window.isDark = 'dark' === 'dark';} else {
+                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            }
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/">酱鲍的个人日志</a>
+        </div>
+        <div class="menu"><a class="menu-item" href="/posts/" rel="noopener noreffer">文章</a><a class="menu-item" href="/tags/" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" rel="noopener noreffer">分类</a><a class="menu-item" href="/about/" rel="noopener noreffer">关于</a><span class="menu-item">|</span>
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-wrapper">
+        <div class="header-container">
+            <div class="header-title">
+                <a href="/">酱鲍的个人日志</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="" rel="noopener noreffer">文章</a><a class="menu-item" href="/tags/" title="" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">分类</a><a class="menu-item" href="/about/" title="" rel="noopener noreffer">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+
+<script>
+    window.desktopHeaderMode = "fixed";
+    window.mobileHeaderMode = "auto";
+</script>
+<main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">Node.js核心模块—Buffer</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/JiangBao" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>酱鲍</a>
+</span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/%E6%8A%80%E6%9C%AF">
+                                <i class="far fa-folder fa-fw"></i>技术
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2018-07-13>2018-07-13</time>&nbsp;
+                </div>
+        </div><div class="content" id="content"><p>JavaScript语言本身对二进制支持比较欠缺，但在处理类似TCP流或者文件流这样的流数据时，必须使用到二进制，为此，Node.js定义了Buffer类，专门处理原始内存数据。Buffer是代表原始堆分配额的数据类型，在Node.js中以类似数组的方式来使用，全局可用，不需要require。</p>
+<h2 id="创建buffer">创建Buffer</h2>
+<blockquote>
+<p>在Node.js v6之前的版本中，使用构造函数<code>new Buffer()</code>的方式来创建Buffer实例，因为<code>new Buffer()</code>的行为会根据所传入的第一个参数的值而明显改变，所以如果应用程序没有正确地校验传入的参数、或未能正确地初始化新分配的Buffer内容，就有可能在无意中引入安全性和可靠性问题。</p>
+</blockquote>
+<p>所以为创建更可靠、更安全的Buffer实例，v6之后，官方建议使用<a href="https://nodejs.org/dist/latest-v8.x/docs/api/buffer.html#buffer_buffer_from_buffer_alloc_and_buffer_allocunsafe" target="_blank" rel="noopener noreffer"><code>Buffer.from()</code>、<code>Buffer.alloc()</code>和<code>Buffer.allocUnsafe()</code></a>
+创建Buffer实例。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// Buffer.alloc(size[, fill[, encoding]])
+</span><span class="c1">// 创建长度为3，且默认用0填充的Buffer
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">buf1</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">alloc</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="c1">// 创建长度为3，且用1填充的Buffer
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">buf2</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">alloc</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="c1">// Buffer.allocUnsafe(size)
+</span><span class="c1">// 创建一个长度为10，且未初始化的Buffer
+</span><span class="c1">// allocUnsafe比alloc方法快
+</span><span class="c1">// 但返回的Buffer可能包含旧数据，因此需用fill()或write()重写
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">buf3</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">allocUnsafe</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+<span class="c1">// Buffer.from()
+</span><span class="c1">// 创建[0x1, 0x2, 0x3]的Buffer
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">buf4</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">from</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="buffer转为其它格式">Buffer转为其它格式</h2>
+<p><code>Buffer.toString()</code>方法，Node.js目前支持的字符编码包括：</p>
+<ul>
+<li>&lsquo;ascii&rsquo; - 仅支持7位ASCII数据。如果设置去掉高位的话，这种编码是非常快的</li>
+<li>&lsquo;utf8&rsquo; - 多字节编码的Unicode字符。许多网页和其它文档格式都使用UTF-8</li>
+<li>&lsquo;utf16le&rsquo; - 2或4个字节，小字节序编码的Unicode字符，支持代理对（U+10000至U+10FFFF）</li>
+<li>&lsquo;ucs2&rsquo; - utf16le的别名</li>
+<li>&lsquo;base64&rsquo; - Base64编码</li>
+<li>&lsquo;latin1&rsquo; - 一种把Buffer编码成一字节编码的字符串的方式</li>
+<li>&lsquo;binary&rsquo; - &lsquo;latin1'的别名</li>
+<li>&lsquo;hex&rsquo; - 将每个字节编码为两个十六进制字符</li>
+</ul>
+<h2 id="使用buffer修改字符串编码">使用Buffer修改字符串编码</h2>
+<h3 id="创建基本验证信息的头部">创建基本验证信息的头部</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="s1">&#39;JiangBao&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">password</span> <span class="o">=</span> <span class="s1">&#39;123456&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">encoded</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">user</span><span class="si">}</span><span class="sb">:</span><span class="si">${</span><span class="nx">password</span><span class="si">}</span><span class="sb">`</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;base64&#39;</span><span class="p">);</span>  <span class="c1">// SmlhbmdCYW86MTIzNDU2
+</span><span class="c1"></span>
+<span class="kr">const</span> <span class="nx">decoded</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">encoded</span><span class="p">,</span> <span class="s1">&#39;base64&#39;</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>  <span class="c1">// JiangBao:123456
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="data-uris">data URIs</h3>
+<p>Data URIs允许一个资源以行内编码的形式存在于web页面中，遵循以下格式：<br>
+<code>data:[MIME-type][;charset=&lt;encoding&gt;[;base64]],&lt;data&gt;</code></p>
+<ol>
+<li>输出data URI：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">mime</span> <span class="o">=</span> <span class="s1">&#39;image/jpeg&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">encoding</span> <span class="o">=</span> <span class="s1">&#39;base64&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="s1">&#39;./icon.jpeg&#39;</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="nx">encoding</span><span class="p">);</span>
+
+<span class="c1">// data:image/jpeg;base64,/9j/2wCEAAgGBgcGBQgHBwcJCQgKDBQNDA...
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">uri</span> <span class="o">=</span> <span class="sb">`data:</span><span class="si">${</span><span class="nx">mime</span><span class="si">}</span><span class="sb">;</span><span class="si">${</span><span class="nx">encoding</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="nx">data</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>解析data URI：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">uri</span> <span class="o">=</span> <span class="s1">&#39;data:image/jpeg;base64,/9j/2wCEAAgGBgcGBQgHBwcJCQgKDBQNDA...&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">imageData</span> <span class="o">=</span> <span class="nx">uri</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+<span class="kr">const</span> <span class="nx">buf</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">imageData</span><span class="p">,</span> <span class="s1">&#39;base64&#39;</span><span class="p">);</span>
+<span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="s1">&#39;./icon.bak.jpeg&#39;</span><span class="p">,</span> <span class="nx">buf</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="使用场景">使用场景</h2>
+<h3 id="1-io操作">1. I/O操作</h3>
+<p>对于文件或者网络数据等操作时，可以使用流式操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">inputStream</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s1">&#39;file.txt&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">outputStream</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">createWriteStream</span><span class="p">(</span><span class="s1">&#39;output.txt&#39;</span><span class="p">);</span>
+
+<span class="nx">inputStream</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">outputStream</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="2-压缩解压">2. 压缩/解压</h3>
+<p>使用Node.js核心模块<code>zlib</code>实现压缩、解压功能也是基于stream构建的</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2018-07-13 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/node.js">Node.js</a></section>
+        <section>
+            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E5%91%A8%E6%9C%AB%E9%9B%A8%E5%A4%A9/" class="prev" rel="prev" title="周末雨天"><i class="fas fa-angle-left fa-fw"></i>周末雨天</a>
+            <a href="/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-events/" class="next" rel="next" title="Node.js核心模块—Events">Node.js核心模块—Events<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div class="comment"></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright">
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/JiangBao" target="_blank">酱鲍</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                <span class="icp"><a rel="license external nofollow noopener noreffer" href="http://beian.miit.gov.cn/" target="_blank">浙ICP备20002824号</a></span></div>
+    </div>
+</footer>
+</div><a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
+            <i class="fas fa-chevron-up fa-fw"></i>
+        </a><script>
+        document.addEventListener('DOMContentLoaded', function () {
+            lightGallery(document.getElementById('content'), {
+                selector: '.lightgallery',
+                speed: 400,
+                hideBarsDelay: 2000,
+                thumbnail: true,
+                exThumbImage: 'data-thumbnail',
+                thumbWidth: 80,
+                thumbContHeight: 80,
+            });
+        });
+    </script><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/lg-zoom.min.js"></script><script src="/js/theme.min.js"></script></body>
+</html>

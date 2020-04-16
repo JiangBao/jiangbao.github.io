@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Node.js核心模块—Events | 酱鲍的个人日志</title>
+        <meta name="Description" content=""><meta property="og:title" content="Node.js核心模块—Events" />
+<meta property="og:description" content="events是非常重要的Node.js核心模块，大多数Node.js核心API构建于惯用的异步事件驱动架构，发布/订阅模式，触发器通过触发命" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-events/" />
+<meta property="article:published_time" content="2018-07-30T16:52:27+08:00" />
+<meta property="article:modified_time" content="2018-07-30T16:52:27+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Node.js核心模块—Events"/>
+<meta name="twitter:description" content="events是非常重要的Node.js核心模块，大多数Node.js核心API构建于惯用的异步事件驱动架构，发布/订阅模式，触发器通过触发命"/>
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileColor" content="#da532c">
+<link rel="canonical" href="https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-events/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="prev" href="https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-buffer/" /><link rel="next" href="https://jiangbao.github.io/%E4%BA%8C%E5%8D%81%E9%83%8E%E5%BD%93%E5%B2%81%E8%B0%88%E4%BB%80%E4%B9%88%E4%B8%80%E8%BE%88%E5%AD%90/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Node.js核心模块—Events",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jiangbao.github.io\/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-events\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/jiangbao.github.io\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "Node.js","wordcount":  985 ,
+        "url": "https:\/\/jiangbao.github.io\/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-events\/","datePublished": "2018-07-30","dateModified": "2018-07-30","publisher": {
+                "@type": "Organization",
+                "name": "酱鲍",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/jiangbao.github.io\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "酱鲍"
+            },"description": ""
+    }
+    </script></head>
+    <body><script>
+            if (!window.localStorage || !window.localStorage.getItem('theme')) {window.isDark = 'dark' === 'dark';} else {
+                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            }
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/">酱鲍的个人日志</a>
+        </div>
+        <div class="menu"><a class="menu-item" href="/posts/" rel="noopener noreffer">文章</a><a class="menu-item" href="/tags/" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" rel="noopener noreffer">分类</a><a class="menu-item" href="/about/" rel="noopener noreffer">关于</a><span class="menu-item">|</span>
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-wrapper">
+        <div class="header-container">
+            <div class="header-title">
+                <a href="/">酱鲍的个人日志</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="" rel="noopener noreffer">文章</a><a class="menu-item" href="/tags/" title="" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">分类</a><a class="menu-item" href="/about/" title="" rel="noopener noreffer">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+
+<script>
+    window.desktopHeaderMode = "fixed";
+    window.mobileHeaderMode = "auto";
+</script>
+<main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">Node.js核心模块—Events</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/JiangBao" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>酱鲍</a>
+</span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/%E6%8A%80%E6%9C%AF">
+                                <i class="far fa-folder fa-fw"></i>技术
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2018-07-30>2018-07-30</time>&nbsp;
+                </div>
+        </div><div class="content" id="content"><p><code>events</code>是非常重要的Node.js核心模块，大多数Node.js核心API构建于惯用的异步事件驱动架构，发布/订阅模式，触发器通过触发命名事件来调用监听器，比如常见的net服务<code>net.Server</code>会在新连接建立时触发<code>connection</code>事件。</p>
+<h2 id="简单使用">简单使用</h2>
+<blockquote>
+<p>所有能触发事件的对象都是<code>EventEmitter</code>类的实例。 这些对象有一个<code>eventEmitter.on()</code>函数，用于将一个或多个函数绑定到命名事件上。事件的命名通常是驼峰式的字符串，但也可以使用任何有效的<code>JavaScript</code>属性键。<br>
+当<code>EventEmitter</code>对象触发一个事件时，所有绑定在该事件上的函数都会被同步地调用。被调用的监听器返回的任何值都将会被忽略并丢弃。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">EventEmitter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;events&#39;</span><span class="p">);</span>
+
+<span class="kr">class</span> <span class="nx">MyEmitter</span> <span class="kr">extends</span> <span class="nx">EventEmitter</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">myEmitter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyEmitter</span><span class="p">();</span>
+
+<span class="nx">myEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;someEvent&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;get someEvent!&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">myEmitter</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;someEvent&#39;</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="错误处理">错误处理</h2>
+<p>当<code>EventEmitter</code>实例出错时，应该触发<code>error</code>事件，需要为<code>error</code>时间注册监听器，防止错误事件导致进程崩溃</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">myEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="sb">`something error: </span><span class="si">${</span><span class="nx">err</span><span class="p">.</span><span class="nx">stack</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">myEmitter</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;this is a error&#39;</span><span class="p">));</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="数量限制">数量限制</h2>
+<p>默认每个事件最多注册10个监听器，事件对象有<code>EventEmitter.defaultMaxListeners</code>属性，但修改这个值会影响所有<code>EventEmitter</code>实例，为了改变单个实例的限制，可以使用<code>emitter.setMaxListeners(n)</code>方法</p>
+<h2 id="异步-vs-同步">异步 vs 同步</h2>
+<p><code>EventEmitter</code>以注册顺序同步调用所有监听器，确保事件的正确排序。可以使用<code>setImmediate()</code>和<code>process.nextTick()</code>切换到异步模式操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">myEmitter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyEmitter</span><span class="p">();</span>
+<span class="c1">// 默认同步
+</span><span class="c1"></span><span class="nx">myEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="nx">firstListener</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;第一个监听器&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">myEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="nx">secondListener</span><span class="p">(</span><span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`第二个监听器中的事件有参数 </span><span class="si">${</span><span class="nx">arg1</span><span class="si">}</span><span class="sb">、</span><span class="si">${</span><span class="nx">arg2</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">myEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="nx">thirdListener</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">parameters</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`第三个监听器中的事件有参数 </span><span class="si">${</span><span class="nx">parameters</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">myEmitter</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+
+<span class="c1">// 异步操作
+</span><span class="c1"></span><span class="nx">myEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">setImmediate</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;异步操作&#39;</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+<span class="nx">myEmitter</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="基于eventemitter实现自定义任务模块">基于EventEmitter实现自定义任务模块</h2>
+<p>之前对于游戏服务器的任务模块，使用了基于事件的发布/订阅模式进行了重构，减少了一些逻辑耦合和回调地狱问题。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;util&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">EventEmitter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;events&#39;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">Mission</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">EventEmitter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">util</span><span class="p">.</span><span class="nx">inherits</span><span class="p">(</span><span class="nx">Mission</span><span class="p">,</span> <span class="nx">EventEmitter</span><span class="p">);</span>
+
+
+<span class="kr">const</span> <span class="nx">mission</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mission</span><span class="p">();</span>
+
+<span class="kd">function</span> <span class="nx">handleMission</span><span class="p">(</span><span class="nx">missionId</span><span class="p">,</span> <span class="nx">progress</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`id:</span><span class="si">${</span><span class="nx">missionId</span><span class="si">}</span><span class="sb">, progress is </span><span class="si">${</span><span class="nx">progress</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">mission</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mission1&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">progress</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">handleMission</span><span class="p">(</span><span class="s1">&#39;mission1&#39;</span><span class="p">,</span> <span class="nx">progress</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nx">mission</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;mission1&#39;</span><span class="p">,</span> <span class="mi">123</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2018-07-30 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/node.js">Node.js</a></section>
+        <section>
+            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-buffer/" class="prev" rel="prev" title="Node.js核心模块—Buffer"><i class="fas fa-angle-left fa-fw"></i>Node.js核心模块—Buffer</a>
+            <a href="/%E4%BA%8C%E5%8D%81%E9%83%8E%E5%BD%93%E5%B2%81%E8%B0%88%E4%BB%80%E4%B9%88%E4%B8%80%E8%BE%88%E5%AD%90/" class="next" rel="next" title="二十郎当岁，谈什么一辈子">二十郎当岁，谈什么一辈子<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div class="comment"></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright">
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/JiangBao" target="_blank">酱鲍</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                <span class="icp"><a rel="license external nofollow noopener noreffer" href="http://beian.miit.gov.cn/" target="_blank">浙ICP备20002824号</a></span></div>
+    </div>
+</footer>
+</div><a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
+            <i class="fas fa-chevron-up fa-fw"></i>
+        </a><script>
+        document.addEventListener('DOMContentLoaded', function () {
+            lightGallery(document.getElementById('content'), {
+                selector: '.lightgallery',
+                speed: 400,
+                hideBarsDelay: 2000,
+                thumbnail: true,
+                exThumbImage: 'data-thumbnail',
+                thumbWidth: 80,
+                thumbContHeight: 80,
+            });
+        });
+    </script><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/lg-zoom.min.js"></script><script src="/js/theme.min.js"></script></body>
+</html>

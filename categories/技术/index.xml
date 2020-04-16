@@ -59,12 +59,39 @@
     </item>
     
     <item>
-      <title>Node.js核心模块——Buffer</title>
-      <link>https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97buffer/</link>
+      <title>Node.js核心模块—Events</title>
+      <link>https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-events/</link>
+      <pubDate>Mon, 30 Jul 2018 16:52:27 +0800</pubDate>
+      
+      <guid>https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-events/</guid>
+      <description>events是非常重要的Node.js核心模块，大多数Node.js核心API构建于惯用的异步事件驱动架构，发布/订阅模式，触发器通过触发命</description>
+    </item>
+    
+    <item>
+      <title>Node.js核心模块—Buffer</title>
+      <link>https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-buffer/</link>
       <pubDate>Fri, 13 Jul 2018 22:13:50 +0800</pubDate>
       
-      <guid>https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97buffer/</guid>
+      <guid>https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-buffer/</guid>
       <description>JavaScript语言本身对二进制支持比较欠缺，但在处理类似TCP流或者文件流这样的流数据时，必须使用到二进制，为此，Node.js定义了</description>
+    </item>
+    
+    <item>
+      <title>Node.js核心模块—Crypto</title>
+      <link>https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-crypto/</link>
+      <pubDate>Tue, 10 Jul 2018 20:53:58 +0800</pubDate>
+      
+      <guid>https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-crypto/</guid>
+      <description>crypto是Node.js核心模块之一，主要用于各类加密场景。使用C/C++实现各类加密算法，然后暴露为javascript接口，包括对O</description>
+    </item>
+    
+    <item>
+      <title>CSS水平垂直居中常用方式</title>
+      <link>https://jiangbao.github.io/css%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E5%B8%B8%E7%94%A8%E6%96%B9%E5%BC%8F/</link>
+      <pubDate>Mon, 15 May 2017 17:24:24 +0800</pubDate>
+      
+      <guid>https://jiangbao.github.io/css%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E5%B8%B8%E7%94%A8%E6%96%B9%E5%BC%8F/</guid>
+      <description>水平居中 1. 行内元素 1 2 3 &amp;lt;body&amp;gt; &amp;lt;div class=&amp;#34;center-wrap&amp;#34;&amp;gt;水平居中&amp;lt;/div&amp;gt; &amp;lt;/body&amp;gt; 1 2 3 .center-wrap { text-align: center; }</description>
     </item>
     
   </channel>

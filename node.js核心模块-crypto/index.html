@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Node.js核心模块—Crypto | 酱鲍的个人日志</title>
+        <meta name="Description" content=""><meta property="og:title" content="Node.js核心模块—Crypto" />
+<meta property="og:description" content="crypto是Node.js核心模块之一，主要用于各类加密场景。使用C/C&#43;&#43;实现各类加密算法，然后暴露为javascript接口，包括对O" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-crypto/" />
+<meta property="article:published_time" content="2018-07-10T20:53:58+08:00" />
+<meta property="article:modified_time" content="2018-07-10T20:53:58+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Node.js核心模块—Crypto"/>
+<meta name="twitter:description" content="crypto是Node.js核心模块之一，主要用于各类加密场景。使用C/C&#43;&#43;实现各类加密算法，然后暴露为javascript接口，包括对O"/>
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileColor" content="#da532c">
+<link rel="canonical" href="https://jiangbao.github.io/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-crypto/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="prev" href="https://jiangbao.github.io/new-start/" /><link rel="next" href="https://jiangbao.github.io/%E5%91%A8%E6%9C%AB%E9%9B%A8%E5%A4%A9/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Node.js核心模块—Crypto",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jiangbao.github.io\/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-crypto\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/jiangbao.github.io\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "Node.js","wordcount":  1072 ,
+        "url": "https:\/\/jiangbao.github.io\/node.js%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97-crypto\/","datePublished": "2018-07-10","dateModified": "2018-07-10","publisher": {
+                "@type": "Organization",
+                "name": "酱鲍",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/jiangbao.github.io\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "酱鲍"
+            },"description": ""
+    }
+    </script></head>
+    <body><script>
+            if (!window.localStorage || !window.localStorage.getItem('theme')) {window.isDark = 'dark' === 'dark';} else {
+                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            }
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/">酱鲍的个人日志</a>
+        </div>
+        <div class="menu"><a class="menu-item" href="/posts/" rel="noopener noreffer">文章</a><a class="menu-item" href="/tags/" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" rel="noopener noreffer">分类</a><a class="menu-item" href="/about/" rel="noopener noreffer">关于</a><span class="menu-item">|</span>
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-wrapper">
+        <div class="header-container">
+            <div class="header-title">
+                <a href="/">酱鲍的个人日志</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="" rel="noopener noreffer">文章</a><a class="menu-item" href="/tags/" title="" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">分类</a><a class="menu-item" href="/about/" title="" rel="noopener noreffer">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+
+<script>
+    window.desktopHeaderMode = "fixed";
+    window.mobileHeaderMode = "auto";
+</script>
+<main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">Node.js核心模块—Crypto</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/JiangBao" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>酱鲍</a>
+</span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/%E6%8A%80%E6%9C%AF">
+                                <i class="far fa-folder fa-fw"></i>技术
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2018-07-10>2018-07-10</time>&nbsp;
+                </div>
+        </div><div class="content" id="content"><p><code>crypto</code>是Node.js核心模块之一，主要用于各类加密场景。使用C/C++实现各类加密算法，然后暴露为javascript接口，包括对OpenSSL的哈希、HMAC、加密、解密、签名以及验证功能的一整套封装。我个人使用最多的场景是各类第三方SDK接入时接口数据的签名认证，使用起来简单方便。</p>
+<p>如果对于加密相关的安全基础知识不了解，可以查看<a href="https://www.cnblogs.com/chyingp/p/nodejs-learning-crypto-theory.html" target="_blank" rel="noopener noreffer">这篇文章</a>
+。</p>
+<h2 id="哈希">哈希</h2>
+<p>MD5是最常用的哈希算法，但是存在一定的碰撞问题，所以可以使用<code>sha1</code>、<code>sha256</code>等，使用crypto模块进行哈希的时候，使用Hash类，主要有三个步骤：</p>
+<ul>
+<li><code>crypto.createHash(algorithm)</code><br>
+创建并返回hash实例，用于生成哈希摘要，<code>algorithm</code>用于指定算法类型，比如：<code>md5</code>、<code>sha1</code></li>
+<li><code>hash.update(data)</code><br>
+使用data更新哈希内容，默认UTF-8编码，流式传输时，可多次调用此方法</li>
+<li><code>hash.digest(encoding='binary')</code><br>
+计算传入数据(调用hash.update())的摘要，按照指定encoding返回，默认是Buffer<br>
+调用此方法后，hash实例已被重置，再次调用会报错</li>
+</ul>
+<p>以MD5签名为例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;crypto);
+</span><span class="s1">
+</span><span class="s1">const hash = crypto.createHash(&#39;</span><span class="nx">md5</span><span class="s1">&#39;);
+</span><span class="s1">
+</span><span class="s1">hash.update(&#39;</span><span class="nx">Hello</span><span class="p">,</span><span class="s1">&#39;);
+</span><span class="s1">hash.update(&#39;</span><span class="nx">world</span><span class="s1">&#39;);
+</span><span class="s1">
+</span><span class="s1">hash.digest(&#39;</span><span class="nx">hex</span><span class="err">&#39;</span><span class="p">);</span>   <span class="c1">// 7add895cc0518859d8cc85da0ff4756b
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="hmac">Hmac</h2>
+<p>Hmac全称<code>keyed-Hash Message Authentication Code</code>，Hmac也属于一种哈希算法，不过需要多一个秘钥输入，可以有效防止类似MD5的彩虹表等攻击<br>
+使用Hmac类生成实例，其它<code>update</code>和<code>digest</code>与hash对象类似</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;crypto&#39;</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">hmac</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createHmac</span><span class="p">(</span><span class="s1">&#39;sha256&#39;</span><span class="p">,</span> <span class="s1">&#39;this-is-your-secret-key&#39;</span><span class="p">);</span>
+
+<span class="nx">hmac</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="s1">&#39;Hello,&#39;</span><span class="p">);</span>
+<span class="nx">hmac</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">);</span>
+
+<span class="nx">hmac</span><span class="p">.</span><span class="nx">digest</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">);</span>    <span class="c1">// 7054a95555e11a1721730e6b04295915b83871c6e090462fcd8c25af7d7afc77
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="对称加密-aes">对称加密-AES</h2>
+<p>通信一方使用秘钥加密原始数据，接收方收到数据后，使用<strong>同一秘钥</strong>进行解密，即为对称加密。AES是我在业务中比较常用的对称加密算法</p>
+<blockquote>
+<p><strong>踩坑更新：</strong> <code>crypto.createCipher</code>方法已于v10.x版本之后废弃，必须使用<code>crypto.createCipheriv</code>方法。否则第三方渠道使用java做aes加密逻辑时，会造成加解密结果不一致的问题！！！</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;crypto&#39;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">aesEncrypt</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">cipher</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createCipher</span><span class="p">(</span><span class="s1">&#39;aes192&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">crypted</span> <span class="o">=</span> <span class="nx">cipher</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="s1">&#39;utf8&#39;</span><span class="p">,</span> <span class="s1">&#39;hex&#39;</span><span class="p">);</span>
+    <span class="nx">crypted</span> <span class="o">+=</span> <span class="nx">cipher</span><span class="p">.</span><span class="kr">final</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">crypted</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">aesDecrypt</span><span class="p">(</span><span class="nx">encrypted</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">decipher</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createDecipher</span><span class="p">(</span><span class="s1">&#39;aes192&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">decrypted</span> <span class="o">=</span> <span class="nx">decipher</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">encrypted</span><span class="p">,</span> <span class="s1">&#39;hex&#39;</span><span class="p">,</span> <span class="s1">&#39;utf8&#39;</span><span class="p">);</span>
+    <span class="nx">decrypted</span> <span class="o">+=</span> <span class="nx">decipher</span><span class="p">.</span><span class="kr">final</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">decrypted</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="s1">&#39;Hello, World!&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">key</span> <span class="o">=</span> <span class="s1">&#39;Password!&#39;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">encrypted</span> <span class="o">=</span> <span class="nx">aesEncrypt</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>        <span class="c1">//98b549b7cf97859d11b814a1bff4eecb
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">decrypted</span> <span class="o">=</span> <span class="nx">aesDecrypt</span><span class="p">(</span><span class="nx">encrypted</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>   <span class="c1">//Hello, World!
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="非对称加密-rsa">非对称加密-RSA</h2>
+<p>非对称加密指双方使用不同的秘钥进行加密和解密，通信双方都会持有公钥和私钥，假设有两组公私钥，<code>a-prv.pem</code>、<code>a-pub.pem</code>和<code>b-prv.pem</code>、<code>b-pub.pem</code>，使用其中一把秘钥加密的密文，只能使用对应的另一把秘钥才能解密，比如，使用了<code>a-prv.pem</code>加密，则必须使用<code>a-pub.pem</code>才能解密。RSA是比较常用的非对称加密算法，主要使用几个方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 私钥加密
+</span><span class="c1"></span><span class="nx">crypto</span><span class="p">.</span><span class="nx">privateEncrypt</span><span class="p">(</span><span class="nx">privateKey</span><span class="p">,</span> <span class="nx">buffer</span><span class="p">)</span>
+<span class="c1">// 公钥解密
+</span><span class="c1"></span><span class="nx">crypto</span><span class="p">.</span><span class="nx">publicDecrypt</span><span class="p">(</span><span class="nx">publicKey</span><span class="p">,</span> <span class="nx">buffer</span><span class="p">)</span>
+
+<span class="c1">// 公钥加密
+</span><span class="c1"></span><span class="nx">crypto</span><span class="p">.</span><span class="nx">publicEncrypt</span><span class="p">(</span><span class="nx">publicKey</span><span class="p">,</span> <span class="nx">buffer</span><span class="p">)</span>
+<span class="c1">// 私钥解密
+</span><span class="c1"></span><span class="nx">crypto</span><span class="p">.</span><span class="nx">privateDecrypt</span><span class="p">(</span><span class="nx">privateKey</span><span class="p">,</span> <span class="nx">buffer</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><a href="https://cnodejs.org/topic/504061d7fef591855112bab5" target="_blank" rel="noopener noreffer">https://cnodejs.org/topic/504061d7fef591855112bab5</a>
+
+<a href="https://www.liaoxuefeng.com/wiki/1022910821149312/1023025778520640" target="_blank" rel="noopener noreffer">https://www.liaoxuefeng.com/wiki/1022910821149312/1023025778520640</a>
+</p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2018-07-10 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/node.js">Node.js</a></section>
+        <section>
+            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/new-start/" class="prev" rel="prev" title="New Start"><i class="fas fa-angle-left fa-fw"></i>New Start</a>
+            <a href="/%E5%91%A8%E6%9C%AB%E9%9B%A8%E5%A4%A9/" class="next" rel="next" title="周末雨天">周末雨天<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div class="comment"></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright">
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/JiangBao" target="_blank">酱鲍</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                <span class="icp"><a rel="license external nofollow noopener noreffer" href="http://beian.miit.gov.cn/" target="_blank">浙ICP备20002824号</a></span></div>
+    </div>
+</footer>
+</div><a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
+            <i class="fas fa-chevron-up fa-fw"></i>
+        </a><script>
+        document.addEventListener('DOMContentLoaded', function () {
+            lightGallery(document.getElementById('content'), {
+                selector: '.lightgallery',
+                speed: 400,
+                hideBarsDelay: 2000,
+                thumbnail: true,
+                exThumbImage: 'data-thumbnail',
+                thumbWidth: 80,
+                thumbContHeight: 80,
+            });
+        });
+    </script><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/lg-zoom.min.js"></script><script src="/js/theme.min.js"></script></body>
+</html>
