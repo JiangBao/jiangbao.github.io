@@ -1,6 +1,6 @@
 # 关于远程办公
 
-![远程办公](https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC.jpg)
+{{< figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC.jpg">}}
 
 出于各方面原因，远程办公一直是自己比较理想的工作状态，从2018年底开始，我就开始尝试全时段远程办公，目前为止将近一年半左右的时间，也算是有了一些自己的体会。
 

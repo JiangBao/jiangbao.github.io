@@ -1,6 +1,6 @@
 # 关于技术债务
 
-![pic](/images/0_UgM_NuSckeEPqYg_.jpeg)
+{{< figure src="/images/0_UgM_NuSckeEPqYg_.jpeg" >}}
 
 最近为了解决公司的技术挖坑问题又是拼命熬夜，每一次偿还技术债务的时候总是心里默念傻~。
 
