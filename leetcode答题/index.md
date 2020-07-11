@@ -5,6 +5,7 @@ leetcode 算法相关答题内容，详见[github仓库](https://github.com/Jian
 <!--more-->
 
 ## 简单
+* [两数之和](https://github.com/JiangBao/leetcode-algorithm/tree/master/easy/towSum)
 
 ## 中等
 
