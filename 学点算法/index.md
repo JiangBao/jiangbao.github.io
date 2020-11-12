@@ -1,8 +1,10 @@
-# Leetcode答题
+# 学点算法
 
-leetcode 算法相关答题内容，详见[github仓库](https://github.com/JiangBao/leetcode-algorithm)
+一些数据结构与算法相关的练习，详见[github仓库](https://github.com/JiangBao/leetcode-algorithm)
 
 <!--more-->
+
+## 基础
 
 ## 简单
 * [两数之和](https://github.com/JiangBao/leetcode-algorithm/tree/master/easy/towSum)
