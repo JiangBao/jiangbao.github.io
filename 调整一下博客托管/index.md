@@ -10,5 +10,16 @@
 
 最后选择coding pages部署站点，PicGo+腾讯云COS做图床，为了方便还将之前[个人主页www.u9c8d.com](http://www.u9c8d.com)映射到了coding页面地址。忙了一下午，[新地址](http://jiang_bao.coding.me)打开速度让整个人都轻松了。翻了一下博客仓库的首次提交还是2017年5月份，快三年了，折腾了几次修改、调整，还是没有好好记录下东西，实在惭愧。
 
+----
+
+**=============2020-10-29更新=============**  
+由于coding个人、企业版入口混乱，之前改版还导致丢了一些代码，pages服务不稳定的问题，于是又转向另一个国内代码平台[gitee](http://gitee.com)，将静态页面放到[gitee pages](https://gitee.com/help/articles/4136#article-header0)。因为之前使用了github actions来做项目的自动化服务，所以只需要在原项目`workflows/deploy.yaml`添加自动化流程即可，整体思路比较简单：
+
+1. gitee下新建同名空项目，例如我个人用户名`jiangbao1123`，新建同名项目，开启gitee pages后即可在`http://jiangbao1123.gitee.io`访问到页面，[参考](https://gitee.com/help/articles/4136#article-header0)
+
+2. 代码提交到github仓库时同步一份到gitee仓库，可以使用[wearerequired/git-mirror-action](https://github.com/wearerequired/git-mirror-action)
+
+3. 如果使用的是gitee pages pro(付费)，则在代码同步后会自动使用`hugo`生成静态文件，刷新页面。如果不想使用付费服务，可以参考[Gitee Pages Action](https://github.com/marketplace/actions/gitee-pages-action)实现自动部署。
+
 > 关于个人的域名：由于在各平台，自己首选的名称都是『酱鲍』、『jiangbao』之类，但可惜此域名已被使用，所以自己选了『鲍』的Unicode编码 `\u9c8d`，虽然识别度不够，但胜在够便宜🤔，够自己折腾了。
 
