@@ -18,7 +18,7 @@
 
 1. 确保基础库版本在`2.11.3`以上，此时打开待分享页面顶部菜单栏，能看到「分享到朋友圈」的入口，由于没开启开关，所以此时看到应该是置灰的  
 
-    ![share-timeline](https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/share-time-line-1.png)
+    {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/share-time-line-1.png" width="371" height="328">}}
 
 2. 打开「分享到朋友圈」菜单开关  
   在带分享页面`onLoad`或者`onShow`生命周期添加以下代码，这也就是官方文档所说的：设置允许“发送给朋友”, 允许“分享到朋友圈”
@@ -30,11 +30,11 @@
     ```
     此时应该可以正常使用「分享到朋友圈」的功能(Android)  
 
-    ![share-timeline](https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/share-timeline-2.png)
+    {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/share-timeline-2.png" width="371" height="328">}}
 
     分享的默认标题为小程序名称，默认图片为小程序logo
 
-    ![share-timeline](https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/share-timeline-3.png)
+    {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/share-timeline-3.png" width="334" height="200">}}
 
 3. 自定义分享参数  
   类似转发给好友的处理函数`onShareAppMessage`，提供了分享到朋友圈的自定义处理函数`onShareTimeline`。按照[文档](https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onShareTimeline)，目前支持`title`、`query`、`imageUrl`三个自定义参数。添加代码：
@@ -48,7 +48,7 @@
     ```
     可以看到自定义分享的效果：
 
-    ![share-timeline](https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/share-timeline-4.png)
+    {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/share-timeline-4.png" width="324" height="196">}}
 
 
 ## 遇到的问题

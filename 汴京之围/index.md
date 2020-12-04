@@ -1,6 +1,6 @@
 # 📖汴京之围
 
-{{< figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/%E6%B1%B4%E4%BA%AC%E4%B9%8B%E5%9B%B4.jpg">}}
+{{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/%E6%B1%B4%E4%BA%AC%E4%B9%8B%E5%9B%B4.jpg">}}
 
 2019年底看到马伯庸的阅读书单上有《汴京之围》这本书，所以就安排进了我的书架，在书架上躺了半年，自身对宋史没什么兴趣，加上阅读靖康之耻这类话题，总是得好好调整一下自己的心理，最近终于找时间把这本书通读了一遍。
 

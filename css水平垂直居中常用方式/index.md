@@ -1,6 +1,6 @@
 # CSS水平垂直居中常用方式
 
-![css居中](https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/CSS%E5%B1%85%E4%B8%AD.png)
+{{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/CSS%E5%B1%85%E4%B8%AD.png">}}
 
 ## 水平居中
 ### 1. 行内元素

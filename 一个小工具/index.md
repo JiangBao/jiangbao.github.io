@@ -1,8 +1,7 @@
 # 一个小工具
 
-一个约球的微信小程序
 
 <!--more-->
 
-{{< figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/gh_e7b7c145b820_258.jpg">}}
+{{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/gh_e7b7c145b820_258.jpg" title="一个约球的微信小程序">}}
 
