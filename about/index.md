@@ -6,6 +6,8 @@
 
 历史爱好者，野路子程序员
 
+一个简单的人，想成为一个有趣的人
+
 >**邮箱**： jiangbao1123@gmail.com  
 >**github**： https://github.com/JiangBao
 </div>
