@@ -107,16 +107,158 @@
   ```
 
 ## 3. 节流throttle
+* 思路  
+  限制目标函数使用频率，规定的单位时间内只能触发一次，如果此时间内多次触发，只有一次生效
+
+* show me the code
+  ```js
+  function throttle(func, ms=1000) {
+    let canRun = true;
+    return function(...args) {
+      if (!canRun) return;
+
+      canRun = false;
+      setTimeout(()=> {
+        func.apply(this, args);
+        canRun = true;
+      }, ms);
+    }
+  }
+  ```
 
 ## 4. 防抖debounce
+* 思路  
+  事件触发n秒后再执行回调，如果这n秒内又被触发，则重新计时
+
+* show me the code
+  ```js
+  function debounce(func, ms=1000) {
+    let timer;
+    return function(...args) {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, ms);
+    }
+  }
+  ```
+
 
 ## 5. bind
+* 思路  
+  改变函数`this`指向，并返回一个待执行方法，执行时可继续传入参数，即`fn.bind(ctx, arg1)(arg2) == fn.cal(ctx, arg1, arg2)`
+
+* show me the code
+  ```js
+  Function.prototype.myBind = function() {
+    if (typeof this !== 'function') {
+      throw 'caller must be a function'
+    }
+    let self = this;
+    let [ctx, ...args] = [...arguments];
+
+    let fn = function() {
+      const newArgs = [...args, ...arguments]
+      if (this instanceof fn) {
+        // new调用，绑定this为实例对象
+        self.apply(this, newArgs)
+      } else {
+        // 普通调用
+        self.apply(ctx, newArgs)
+      }
+    }
+
+    fn.prototype = Object.create(self.prototype);
+
+    return fn;
+  }
+  ```
 
 ## 6. call
+* 思路  
+  将`this`指向调用者，在调用者(context)上直接调用方法，触发this的绑定
+
+* show me the code
+  ```js
+  Function.prototype.myCall = function() {
+    if (typeof this !== 'function') {
+      throw 'caller must be function'
+    }
+    const [ctx, ...args] = [...arguments]
+    // 可以通过Symbol设置key，防止覆盖原有属性
+    ctx._fn = this
+    const res = ctx._fn(args)
+    delete ctx['_fn']
+
+    return res
+  }
+  ```
+
 
 ## 7. apply
+* 思路  
+  同`call`
+
+* show me the code
+  ```js
+  Function.prototype.myApply = function() {
+    if (typeof this !== 'function') {
+      throw 'caller must be function'
+    }
+
+    let res
+    const [ctx, args, ...others] = [...arguments]
+    ctx._fn = this
+    if (args) {
+      res = ctx._fn(...args)
+    } else {
+      res = ctx._fn()
+    }
+    delete ctx._fn
+
+    return res
+  }
+  ```
+
 
 ## 8. 深拷贝
+* 思路  
+  核心思路是在浅拷贝的基础上，对子项为对象类型的进行递归；对于循环引用的问题可以使用`WeakMap`缓存比较来解决
+
+* show me the code
+  ```js
+  function cloneDeep(obj, cache = new WeakMap()) {
+    if (!obj instanceof Object) return obj
+    if (obj instanceof Date) return new Date(obj)
+    if (obj instanceof RegExp) return new RegExp(obj.source, obj.flags)
+
+    // 循环引用比较
+    if (cache.get(obj)) return cache.get(obj)
+
+    // 支持函数
+    if (obj instanceof Function) {
+      return function() {
+        obj.apply(this, arguments)
+      }
+    }
+
+    const res = Array.isArray(obj) ? [] : {}
+
+    cache.set(obj, res)
+
+    Object.keys(obj).forEach(key => {
+      if (obj[key] instanceof Object) {
+        res[key] = cloneDeep(obj[key], cache)
+      } else {
+        res[key] = obj[key]
+      }
+    })
+
+    return res
+  }
+  ```
 
 > [Promise|MDN](https://developer.mozilla.org/zh-cn/docs/Web/JavaScript/Reference/Global_Objects/Promise)  
   [juejin|iboying](https://juejin.cn/post/6873513007037546510)  
