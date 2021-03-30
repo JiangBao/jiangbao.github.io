@@ -260,6 +260,22 @@
   }
   ```
 
+## 9. 柯里化 
+* show me the code
+  ```js
+  function curry(fn, args = []) {
+    return function() {
+      let newArgs = [...args, ...arguments];
+      if (newArgs.length < fn.length) {
+        return curry.call(this, fn, newArgs)
+      } else {
+        return fn.apply(this, newArgs)
+      }
+    }
+  }
+  ```
+
+
 > [Promise|MDN](https://developer.mozilla.org/zh-cn/docs/Web/JavaScript/Reference/Global_Objects/Promise)  
   [juejin|iboying](https://juejin.cn/post/6873513007037546510)  
   [github|sisterAn](https://github.com/sisterAn/JavaScript-Algorithms)
