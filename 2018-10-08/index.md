@@ -1,6 +1,6 @@
 # 2018-10-08
 
-![images](/images/20181006-shuyuan.jpeg)
+{{<figure src="/images/20181006-shuyuan.jpeg">}}
 
 <!--more-->
 

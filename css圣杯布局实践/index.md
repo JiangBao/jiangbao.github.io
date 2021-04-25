@@ -1,6 +1,6 @@
 # CSS圣杯布局实践
 
-![圣杯布局](https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80.png)
+{{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80.png">}}
 
 圣杯布局和双飞翼布局都是平时开发中比较常用的页面布局，两者核心都一样，本质上都是三栏布局，此文记录自己平时对圣杯布局的实践。
 
