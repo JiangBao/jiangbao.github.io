@@ -1,6 +1,6 @@
 # 兴趣周刊(第 3 期)
 
-{{<figure src="https://gamezo.co.uk/wp-content/uploads/2021/03/MSI.jpg" title="msi 2021, rng 💪🏻">}}
+{{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/MSI2021.jpeg" title="msi 2021, rng 💪🏻">}}
 <!--more-->
 
 ## 代码那些事
