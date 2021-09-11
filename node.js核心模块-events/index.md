@@ -1,4 +1,4 @@
-# Node.js核心模块—Events
+# Node.js 核心模块—Events
 
 `events`是非常重要的Node.js核心模块，大多数Node.js核心API构建于惯用的异步事件驱动架构，发布/订阅模式，触发器通过触发命名事件来调用监听器，比如常见的net服务`net.Server`会在新连接建立时触发`connection`事件。
 

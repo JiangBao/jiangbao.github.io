@@ -1,4 +1,4 @@
-# 又踩一个postgreSQL的坑
+# 又踩一个 postgreSQL 的坑
 
 今日在家里的笔记本下安装`postgreSQL`跑一个测试项目，`brew`一键安装，安装之后`psql --version`，一看轻松搞定，可是试图连接时它却这样告诉我
 

@@ -1,4 +1,4 @@
-# CSS圣杯布局实践
+# CSS 圣杯布局实践
 
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80.png">}}
 

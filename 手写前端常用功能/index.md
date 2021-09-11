@@ -5,18 +5,18 @@
 
 ## 1. new
 * 思路  
-  js的`new`运算符用于创建对象的实例，使用`new`的时候主要有以下操作：
-    1. 创建空对象`{}`
-    2. 链接该对象(设置该对象的`constructor`)到另一个对象
-    3. 将步骤1新创建的对象作为`this`的上下文
-    4. 如果该函数没有返回对象，则返回`this`
+  js 的 `new` 运算符用于创建对象的实例，使用 `new` 的时候主要有以下操作：
+    1. 创建空对象 `{}`
+    2. 链接该对象(设置该对象的 `constructor` )到另一个对象
+    3. 将步骤1新创建的对象作为 `this` 的上下文
+    4. 如果该函数没有返回对象，则返回 `this`
 
 * show me the code
   ```js
   function customizeNew(Fn, ...args) {
     // 创建空对象并链接到原型
     let obj = Object.create(Fn.prototype);
-    // 绑定this
+    // 绑定 this
     let res = Fn.apply(obj, args);
 
     return res instanceof Object ? res : obj;
@@ -24,12 +24,12 @@
   ```
 ## 2. 手写Promise
 * 思路  
-  `Promise`主要解决传统异步编程中“回调地狱”导致代码阅读性和维护性差的问题，使用链式风格替代传统的嵌套回调风格，是更优雅的异步编程解决方案。
-  根据「Promise/A+规范」，`promise`有三个状态：`pending`(待定)、`fulfilled`(已兑现)、`rejected`(已拒绝)，需要实现的基础功能包括：
-    1. `new Promise()`参数需要一个处理器函数`executor()`
-    2. 处理器函数的参数为`resolve`和`reject`，成功调用`resolve`函数，失败调用`reject`函数
-    3. 默认状态为`pending`，只能从`peding`到`fulfilled`或`rejected`，且状态确认后不可再改变
-    4. 包含`then`方法，接收`onFulfilled`和`onRejected`参数，成功执行`onFulfilled`，失败执行`onRejected`
+  `Promise` 主要解决传统异步编程中“回调地狱”导致代码阅读性和维护性差的问题，使用链式风格替代传统的嵌套回调风格，是更优雅的异步编程解决方案。
+  根据「Promise/A+ 规范」，`promise` 有三个状态：`pending`(待定)、`fulfilled`(已兑现)、`rejected`(已拒绝)，需要实现的基础功能包括：
+    1. `new Promise()` 参数需要一个处理器函数 `executor()`
+    2. 处理器函数的参数为 `resolve` 和 `reject`，成功调用 `resolve` 函数，失败调用 `reject` 函数
+    3. 默认状态为 `pending`，只能从 `peding` 到 `fulfilled` 或 `rejected`，且状态确认后不可再改变
+    4. 包含 `then` 方法，接收 `onFulfilled` 和 `onRejected` 参数，成功执行 `onFulfilled`，失败执行 `onRejected`
 
     {{<figure src="https://mdn.mozillademos.org/files/8633/promises.png">}}
 
@@ -43,9 +43,9 @@
 
   class MyPromise {
     constructor(executor) {
-      this.status = STATUS.PENDING;             //默认状态pending
-      this.value = undefined;                   //fulfilled状态时的值
-      this.error = undefined;                   //rejected状态时的错误原因
+      this.status = STATUS.PENDING;             //默认状态 pending
+      this.value = undefined;                   //fulfilled 状态时的值
+      this.error = undefined;                   //rejected 状态时的错误原因
       this.onResolvedCallbacks = [];            //存放成功的回调
       this.onRejectedCallbacks = [];            //存放失败的回调
       this._resolve = this._resolve.bind(this);
@@ -128,7 +128,7 @@
 
 ## 4. 防抖debounce
 * 思路  
-  事件触发n秒后再执行回调，如果这n秒内又被触发，则重新计时
+  事件触发 n 秒后再执行回调，如果这 n 秒内又被触发，则重新计时
 
 * show me the code
   ```js
@@ -148,7 +148,7 @@
 
 ## 5. bind
 * 思路  
-  改变函数`this`指向，并返回一个待执行方法，执行时可继续传入参数，即`fn.bind(ctx, arg1)(arg2) == fn.cal(ctx, arg1, arg2)`
+  改变函数 `this` 指向，并返回一个待执行方法，执行时可继续传入参数，即 `fn.bind(ctx, arg1)(arg2) == fn.cal(ctx, arg1, arg2)`
 
 * show me the code
   ```js
@@ -162,7 +162,7 @@
     let fn = function() {
       const newArgs = [...args, ...arguments]
       if (this instanceof fn) {
-        // new调用，绑定this为实例对象
+        // new 调用，绑定 this 为实例对象
         self.apply(this, newArgs)
       } else {
         // 普通调用
@@ -178,7 +178,7 @@
 
 ## 6. call
 * 思路  
-  将`this`指向调用者，在调用者(context)上直接调用方法，触发this的绑定
+  将 `this` 指向调用者，在调用者(context)上直接调用方法，触发 this 的绑定
 
 * show me the code
   ```js
@@ -225,7 +225,7 @@
 
 ## 8. 深拷贝
 * 思路  
-  核心思路是在浅拷贝的基础上，对子项为对象类型的进行递归；对于循环引用的问题可以使用`WeakMap`缓存比较来解决
+  核心思路是在浅拷贝的基础上，对子项为对象类型的进行递归；对于循环引用的问题可以使用 `WeakMap` 缓存比较来解决
 
 * show me the code
   ```js

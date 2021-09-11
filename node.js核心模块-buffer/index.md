@@ -1,4 +1,4 @@
-# Node.js核心模块—Buffer
+# Node.js 核心模块—Buffer
 
 JavaScript语言本身对二进制支持比较欠缺，但在处理类似TCP流或者文件流这样的流数据时，必须使用到二进制，为此，Node.js定义了Buffer类，专门处理原始内存数据。Buffer是代表原始堆分配额的数据类型，在Node.js中以类似数组的方式来使用，全局可用，不需要require。
 

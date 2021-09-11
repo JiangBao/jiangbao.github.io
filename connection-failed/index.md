@@ -1,6 +1,6 @@
 # Connection failed
 
-今天将新购买的个人服务器数据库升级MySQL8.0，出现了本地Navicat Premium无法连接的问题。
+今天将新购买的个人服务器数据库升级 MySQL8.0，出现了本地 Navicat Premium 无法连接的问题。
 
 <!--more-->
 
@@ -11,9 +11,9 @@
 MySQL said: Authentication plugin 'caching_sha2_password' 
 cannot be loaded: dlopen(/usr/local/lib/plugin/caching_sha2_password.so, 2): image not found
 ```
-最终发现是因为MySQL8之后加密规则导致的：  
+最终发现是因为 MySQL8 之后加密规则导致的：  
 
-> MySQL8版本之前之前的加密规则是`mysql_native_password`，在MySQL8之后，加密规则是`caching_sha2_password`
+> MySQL8版本之前之前的加密规则是 `mysql_native_password`，在 MySQL8 之后，加密规则是 `caching_sha2_password`
 
 通过还原登录密码加密规则解决此问题：
 ```Bash

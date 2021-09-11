@@ -3,8 +3,8 @@
 
 <!--more-->
 
-最近换了新的`MacBook Pro M1`开发，遇到了一些 Node.js 运行错误，都是一些`M1`芯片下比较常见的问题：
-1. 一个旧项目运行出现了`out of memory`的错误：
+最近换了新的 `MacBook Pro M1` 开发，遇到了一些 Node.js 运行错误，都是一些 `M1` 芯片下比较常见的问题：
+1. 一个旧项目运行出现了 `out of memory` 的错误：
     ```
     <--- Last few GCs --->
 
@@ -22,9 +22,9 @@
     > * Node.js: v14.16.1
     > * OS: macOS Big Sur with an M1 chip
 
-    参考[此处](https://github.com/TypeStrong/typedoc/issues/1491)，升级至`Node.js v15`解决了此问题。
+    参考[此处](https://github.com/TypeStrong/typedoc/issues/1491)，升级至 `Node.js v15` 解决了此问题。
 
-2. 使用`create-react-app`新建的项目首次运行出现了`Check failed: allocator->SetPermissions`
+2. 使用 `create-react-app` 新建的项目首次运行出现了 `Check failed: allocator->SetPermissions`
     ```
     #
     # Fatal error in , line 0

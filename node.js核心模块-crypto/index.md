@@ -1,4 +1,4 @@
-# Node.js核心模块—Crypto
+# Node.js 核心模块—Crypto
 
 `crypto`是Node.js核心模块之一，主要用于各类加密场景。使用C/C++实现各类加密算法，然后暴露为javascript接口，包括对OpenSSL的哈希、HMAC、加密、解密、签名以及验证功能的一整套封装。我个人使用最多的场景是各类第三方SDK接入时接口数据的签名认证，使用起来简单方便。
 

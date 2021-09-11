@@ -1,4 +1,4 @@
-# CSS水平垂直居中常用方式
+# CSS 水平垂直居中常用方式
 
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/CSS%E5%B1%85%E4%B8%AD.png">}}
 
