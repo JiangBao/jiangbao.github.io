@@ -9,6 +9,7 @@
 * [大屏数据可视化项目集合 iDataV](https://github.com/yyhsong/iDataV)
 * [didact](https://github.com/pomber/didact)，从零开始实现一个 React 吧，学习了
 * [Windows 11 in React](https://win11.blueedge.me/)，比较酷的项目
+* [开源浪潮下程序员的职业规划和成长](https://juejin.cn/post/7005020612909334558)
 
 ## 不务正业的爱好
 
