@@ -9,6 +9,11 @@
 * [React Fiber 详细解析](https://zhuanlan.zhihu.com/p/424967867)，快来复习一下
 * [Rust Is The Future of JavaScript Infrastructure](https://leerob.io/blog/rust)，RUST 真的是 JavaScript 基建的未来吗？你已经学起来了吗？
 * [现代 Web 开发困局](https://mp.weixin.qq.com/s/PjpA4CBoC3Q0-gT5f5qlPg)，分析挺好的文章
+* [React 18 进入 Beta 阶段](https://twitter.com/reactjs/status/1460380211262930948)
+* [TypeScript 4.5 发布](https://twitter.com/typescript/status/1461063189286703104)
+* [看尤雨溪亲自下场对线](https://www.zhihu.com/question/472193255/answer/2235015723)，为什么 Vue 在国际上越来越没影响力？前端这个圈子，喜欢惹口水的还真是不少
+* [Rust 审核团队宣布辞职](https://github.com/rust-lang/team/pull/671)，围观[Reddit 讨论](https://github.com/rust-lang/team/pull/671)
 
 ## 不务正业的爱好
 * [坦克 500 亮相广州车展](https://auto.sina.com.cn/newcar/x/2021-11-19/detail-iktzscyy6413139.shtml)，看起来很帅的样子，从 [300](https://www.tanksuv.com/tank300.html) 到 [500](https://www.tanksuv.com/tank500.html)，希望国产车越做越好吧
+* [英雄联盟：双城之战](https://lol.qq.com/arcane/)，英雄联盟首部动画剧集
