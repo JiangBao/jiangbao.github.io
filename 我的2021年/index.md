@@ -1,7 +1,7 @@
 # 我的 2021 年
 
 
-<!--mre-->
+<!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/%E6%88%91%E7%9A%842021%E5%B9%B4%E5%BA%A6%E5%9B%BE%E7%89%87.jpg">}}
 
 ### 工作 :computer:
