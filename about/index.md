@@ -1,5 +1,6 @@
 # 关于『酱鲍』
 
+{{<figure src="/images/bg-about.jpg" width="400">}}
 
 <div align=center>
 极简主义者
@@ -13,3 +14,4 @@
 >**邮箱**： jiangbao1123@gmail.com  
 >**github**： https://github.com/JiangBao
 </div>
+
