@@ -1,7 +1,7 @@
 # 兴趣周刊(第 33 期)
 
-{{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/dakao-shexian.jpg" title="电视剧《大考》，熟悉的老家画面">}}
 <!--more-->
+{{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/dakao-shexian.jpg" title="电视剧《大考》，熟悉的老家画面">}}
 
 ## 代码那些事
 * [onoco](https://www.onoco.com/)，一款用于追踪婴儿成长和家庭成员管理的软件，风格很不错。自己对泡泡的记录还是过于原始，电子笔记 + 成长相册，或许可以考虑来个管理软件
