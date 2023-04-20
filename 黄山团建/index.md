@@ -1,4 +1,4 @@
-# 黄山团建
+# 特种兵旅行
 
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/2023041501.jpg" title="2023.04.15 黄山之行">}}
 <!--more-->

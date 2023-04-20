@@ -1,0 +1,426 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>handle errors in React - 非正常人类研究中心</title><meta name=Description content><meta property="og:title" content="handle errors in React"><meta property="og:description" content><meta property="og:type" content="article"><meta property="og:url" content="https://jiangbao.github.io/react%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/"><meta property="article:published_time" content="2023-04-13T15:55:17+08:00"><meta property="article:modified_time" content="2023-04-13T15:55:17+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="handle errors in React"><meta name=twitter:description content><meta name=application-name content="非正常人类研究中心"><meta name=apple-mobile-web-app-title content="非正常人类研究中心"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://jiangbao.github.io/react%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/><link rel=prev href=https://jiangbao.github.io/%E6%88%91%E7%9A%842022%E5%B9%B4/><link rel=next href=https://jiangbao.github.io/%E9%BB%84%E5%B1%B1%E5%9B%A2%E5%BB%BA/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"handle errors in React","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/jiangbao.github.io\/react%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86\/"},"genre":"posts","keywords":"技术, React","wordcount":1668,"url":"https:\/\/jiangbao.github.io\/react%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86\/","datePublished":"2023-04-13T15:55:17+08:00","dateModified":"2023-04-13T15:55:17+08:00","author":{"@type":"Person","name":"酱鲍"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':('auto'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'auto'==='dark'))&&document.body.setAttribute('theme','dark');</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=非正常人类研究中心>非正常人类研究中心</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/weekly title=兴趣周刊>周刊 </a><a class=menu-item href=/timeline title=生活时间线>生活 </a><a class=menu-item href=/about/ title=关于酱鲍>关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a><span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span></span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=非正常人类研究中心>非正常人类研究中心</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a><span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/>文章</a><a class=menu-item href=/weekly title=兴趣周刊>周刊</a><a class=menu-item href=/timeline title=生活时间线>生活</a><a class=menu-item href=/about/ title=关于酱鲍>关于</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">handle errors in React</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=https://github.com/JiangBao title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>酱鲍</a></span>&nbsp;
+<span class=post-category>收录于<a href=/categories/%E6%8A%80%E6%9C%AF/>
+<i class="far fa-folder fa-fw"></i>技术</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i><time datetime=2023-04-13>2023-04-13</time>&nbsp;
+<i class="fas fa-pencil-alt fa-fw"></i>约 1668 字&nbsp;
+<i class="far fa-clock fa-fw"></i>预计阅读 4 分钟&nbsp;</div></div><div class="details toc" id=toc-static><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#trycatch>try/catch</a></li><li><a href=#errorboundary>ErrorBoundary</a></li><li><a href=#more>more</a></li></ul></nav></div></div><div class=content id=content><p>实际应用中，总会因为测试范围不够，或者编码过程中边界情况考虑不足等等原因导致错误的出现。为了避免一个小的报错就导致页面卡死这样的尴尬，如何优雅地处理错误始终是项目上线前我们需要思考的问题。</p><p>如果在实际开发中，你问我：React 项目中如何处理错误？那我直接推荐 <a href=https://github.com/bvaughn/react-error-boundary target=_blank rel="noopener noreffer">react-error-boundary</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=kr>import</span> <span class=p>{</span> <span class=nx>ErrorBoundary</span><span class=p>,</span> <span class=nx>useErrorBoundary</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;react-error-boundary&#39;</span>
+
+<span class=kr>const</span> <span class=nx>SomeComponent</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=kr>const</span> <span class=p>{</span> <span class=nx>showBoundary</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>useErrorBoundary</span><span class=p>()</span>
+
+  <span class=nx>useEffect</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=k>throw</span> <span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;some render error&#39;</span><span class=p>)</span>
+  <span class=p>},</span> <span class=p>[])</span>
+
+  <span class=kr>const</span> <span class=nx>handleClick</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=nx>showBoundary</span><span class=p>(</span><span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;some async error&#39;</span><span class=p>))</span>
+  <span class=p>}</span>
+
+  <span class=k>return</span> <span class=p>(</span>
+    <span class=o>&lt;</span><span class=nx>div</span> <span class=nx>onClick</span><span class=o>=</span><span class=p>{</span><span class=nx>handleClick</span><span class=p>}</span><span class=o>&gt;</span>
+      <span class=nx>some</span> <span class=nx>component</span>
+    <span class=o>&lt;</span><span class=err>/div&gt;</span>
+  <span class=p>)</span>
+<span class=p>}</span>
+
+
+<span class=kr>const</span> <span class=nx>App</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=k>return</span> <span class=p>(</span>
+    <span class=o>&lt;</span><span class=nx>ErrorBoundary</span> <span class=nx>fallback</span><span class=o>=</span><span class=p>{</span><span class=o>&lt;</span><span class=nx>div</span><span class=o>&gt;</span><span class=nx>Someting</span> <span class=nx>went</span> <span class=nx>wrong</span><span class=o>!&lt;</span><span class=err>/div&gt;}&gt;</span>
+      <span class=o>&lt;</span><span class=nx>SomeComponent</span> <span class=o>/&gt;</span>
+    <span class=o>&lt;</span><span class=err>/ErrorBoundary&gt;</span>
+  <span class=p>)</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>可以认为这个库是官方 <a href=https://legacy.reactjs.org/docs/error-boundaries.html target=_blank rel="noopener noreffer">Error Boundaries</a> 的增强版，使用它就能获得足够优雅的错误处理功能。如果这就是你需要的，那看看 <a href=https://www.npmjs.com/package/react-error-boundary target=_blank rel="noopener noreffer">它的文档</a> 就够了，如果还想了解更多，那继续往下看。</p><h2 id=trycatch>try/catch</h2><p>如何捕获 JavaScript 中的错误？通常我们使用 <code>try/catch</code> 语句，<code>Promise</code> 中的 <code>catch</code> 方法也是同理：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=k>try</span> <span class=p>{</span>
+  <span class=c1>// function might throw error
+</span><span class=c1></span>  <span class=nx>func</span><span class=p>()</span>
+  <span class=nx>await</span> <span class=nx>asyncFunc</span><span class=p>()</span>
+<span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+  <span class=c1>// catch error
+</span><span class=c1></span>  <span class=nx>doWhenError</span><span class=p>()</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>如果是在 React 组件中，我们很容易想到为组件设置一个错误状态，如果产生错误，就改变错误状态，从而渲染错误提示组件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=kr>const</span> <span class=nx>SomeComponent</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=kr>const</span> <span class=p>[</span><span class=nx>hasError</span><span class=p>,</span> <span class=nx>setHasError</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useState</span><span class=p>(</span><span class=kc>false</span><span class=p>)</span>
+
+  <span class=nx>useEffect</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=k>try</span> <span class=p>{</span>
+      <span class=nx>func</span><span class=p>()</span>
+    <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+      <span class=nx>setHasError</span><span class=p>(</span><span class=kc>true</span><span class=p>)</span>
+    <span class=p>}</span>
+  <span class=p>},</span> <span class=p>[])</span>
+
+  <span class=k>if</span> <span class=p>(</span><span class=nx>hasError</span><span class=p>)</span> <span class=k>return</span> <span class=o>&lt;</span><span class=nx>CommonError</span> <span class=o>/&gt;</span>
+
+  <span class=k>return</span> <span class=o>&lt;</span><span class=nx>div</span><span class=o>&gt;</span><span class=nx>some</span> <span class=nx>component</span><span class=o>&lt;</span><span class=err>/div&gt;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>不过这个方法有几点不足：</p><ol><li>❗️不能直接包裹 hook、请求等异步方法，必须在每个异步操作中单独捕获<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=k>try</span> <span class=p>{</span>
+  <span class=nx>useEffect</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=k>throw</span> <span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;some error!&#39;</span><span class=p>)</span>
+  <span class=p>},</span> <span class=p>[])</span>
+<span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+  <span class=c1>// can&#39;t catch error
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></td></tr></table></div></div></li><li>❗️无法捕获子组件，子组件只是被创建，实际渲染时才会触发错误，而这种方法是无法捕获的<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=kr>const</span> <span class=nx>SomeComponent</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=k>try</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=o>&lt;</span><span class=nx>SomeErrorChild</span> <span class=o>/&gt;</span>
+  <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+    <span class=c1>// can&#39;t catch error
+</span><span class=c1></span>  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div></li><li>❗️如果在渲染过程中重置错误状态，会造成渲染死循环<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=kr>const</span> <span class=nx>SomeComponent</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=kr>const</span> <span class=p>[</span><span class=nx>hasError</span><span class=p>,</span> <span class=nx>setHasError</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useState</span><span class=p>(</span><span class=kc>false</span><span class=p>)</span>
+
+  <span class=k>try</span> <span class=p>{</span>
+    <span class=nx>someErrorFunc</span><span class=p>()</span>
+  <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+    <span class=c1>// might loop rendering
+</span><span class=c1></span>    <span class=nx>setHasError</span><span class=p>(</span><span class=kc>true</span><span class=p>)</span>
+  <span class=p>}</span>
+
+  <span class=c1>// ...
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></td></tr></table></div></div></li></ol><h2 id=errorboundary>ErrorBoundary</h2><p>React 16 版本后引入了<a href=https://legacy.reactjs.org/docs/error-boundaries.html target=_blank rel="noopener noreffer">「错误边界」</a>的概念，处理子组件渲染过程中的错误。按照官方文档说明，通过实现 <code>getDerivedStateFromError</code>、<code>componentDidCatch</code> 两个方法，我们可以封装一个这样的错误处理组件 <code>ErrorBoundary</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=kr>class</span> <span class=nx>ErrorBoundary</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
+  <span class=nx>constructor</span><span class=p>(</span><span class=nx>props</span><span class=p>)</span> <span class=p>{</span>
+    <span class=kr>super</span><span class=p>(</span><span class=nx>props</span><span class=p>)</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>state</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>hasError</span><span class=o>:</span> <span class=kc>false</span> <span class=p>}</span>
+  <span class=p>}</span>
+
+  <span class=kr>static</span> <span class=nx>getDerivedStateFromError</span><span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+    <span class=c1>// Update state so the next render will show the fallback UI.
+</span><span class=c1></span>    <span class=k>return</span> <span class=p>{</span> <span class=nx>hasError</span><span class=o>:</span> <span class=kc>true</span> <span class=p>}</span>
+  <span class=p>}</span>
+
+  <span class=nx>componentDidCatch</span><span class=p>(</span><span class=nx>error</span><span class=p>,</span> <span class=nx>errorInfo</span><span class=p>)</span> <span class=p>{</span>
+    <span class=c1>// You can also log the error to an error reporting service
+</span><span class=c1></span>    <span class=nx>logErrorToMyService</span><span class=p>(</span><span class=nx>error</span><span class=p>,</span> <span class=nx>errorInfo</span><span class=p>)</span>
+  <span class=p>}</span>
+
+  <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>if</span> <span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>hasError</span><span class=p>)</span> <span class=p>{</span>
+      <span class=c1>// You can render any custom fallback UI
+</span><span class=c1></span>      <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>fallback</span>
+    <span class=p>}</span>
+
+    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>children</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>用它包裹子组件，可以捕获子组件渲染错误，并展示优雅降级的页面：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=o>&lt;</span><span class=nx>ErrorBoundary</span> <span class=nx>fallback</span><span class=o>=</span><span class=p>{</span><span class=o>&lt;&gt;</span><span class=nx>Something</span> <span class=nx>went</span> <span class=nx>wrong</span><span class=p>.</span><span class=o>&lt;</span><span class=err>/&gt;}&gt;</span>
+  <span class=o>&lt;</span><span class=nx>SomeComponent</span> <span class=o>/&gt;</span>
+<span class=o>&lt;</span><span class=err>/ErrorBoundary&gt;</span>
+</code></pre></td></tr></table></div></div><p>不过错误边界只能够处理发生在 React 生命周期中的错误，异步请求中、点击事件处理等生命周期之外的错误，将无法被捕获，比如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=kr>const</span> <span class=nx>SomeComponent</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=nx>useEffect</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=c1>// can catch
+</span><span class=c1></span>    <span class=k>throw</span> <span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;error!!!&#39;</span><span class=p>)</span>
+  <span class=p>},</span> <span class=p>[])</span>
+
+  <span class=kr>const</span> <span class=nx>handleClick</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=c1>// can&#39;t catch
+</span><span class=c1></span>    <span class=k>throw</span> <span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;error!!!&#39;</span><span class=p>)</span>
+  <span class=p>}</span>
+
+  <span class=k>return</span> <span class=p>(</span>
+    <span class=o>&lt;</span><span class=nx>div</span> <span class=nx>onClick</span><span class=o>=</span><span class=p>{</span><span class=nx>handleClick</span><span class=p>}</span><span class=o>&gt;</span>
+      <span class=nx>some</span> <span class=nx>component</span>
+    <span class=o>&lt;</span><span class=err>/div&gt;</span>
+  <span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kr>const</span> <span class=nx>App</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=k>return</span> <span class=p>(</span>
+    <span class=o>&lt;</span><span class=nx>ErrorBoundary</span> <span class=nx>fallback</span><span class=o>=</span><span class=p>{</span><span class=o>&lt;&gt;</span><span class=nx>Something</span> <span class=nx>went</span> <span class=nx>wrong</span><span class=p>.</span><span class=o>&lt;</span><span class=err>/&gt;}&gt;</span>
+      <span class=o>&lt;</span><span class=nx>SomeComponent</span> <span class=o>/&gt;</span>
+    <span class=o>&lt;</span><span class=err>/ErrorBoundary&gt;</span>
+  <span class=p>)</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>回顾前文，对于这样的错误，我们可以使用 <code>try/catch</code> 来捕获，将组件错误状态抛给上层统一处理。那结合 <code>try/catch</code> 和 <code>ErrorBoundary</code>，我们就能完整地捕获组件错误了：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=kr>const</span> <span class=nx>SomeComponent</span> <span class=o>=</span> <span class=p>({</span> <span class=nx>onError</span> <span class=p>})</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=kr>const</span> <span class=nx>handleClick</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=k>try</span> <span class=p>{</span>
+      <span class=k>throw</span> <span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;error!!!&#39;</span><span class=p>)</span>
+    <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+      <span class=nx>onError</span><span class=p>()</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+
+  <span class=k>return</span> <span class=p>(</span>
+    <span class=o>&lt;</span><span class=nx>div</span> <span class=nx>onClick</span><span class=o>=</span><span class=p>{</span><span class=nx>handleClick</span><span class=p>}</span><span class=o>&gt;</span>
+      <span class=nx>some</span> <span class=nx>component</span>
+    <span class=o>&lt;</span><span class=err>/div&gt;</span>
+  <span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kr>const</span> <span class=nx>App</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=kr>const</span> <span class=p>[</span><span class=nx>hasError</span><span class=p>,</span> <span class=nx>setHasError</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useState</span><span class=p>(</span><span class=kc>false</span><span class=p>)</span>
+
+  <span class=kr>const</span> <span class=nx>fallback</span> <span class=o>=</span> <span class=o>&lt;&gt;</span><span class=nx>Something</span> <span class=nx>went</span> <span class=nx>wrong</span><span class=p>.</span><span class=o>&lt;</span><span class=err>/&gt;</span>
+
+  <span class=k>if</span> <span class=p>(</span><span class=nx>hasError</span><span class=p>)</span> <span class=k>return</span> <span class=nx>fallback</span>
+
+  <span class=k>return</span> <span class=p>(</span>
+    <span class=o>&lt;</span><span class=nx>ErrorBoundary</span> <span class=nx>fallback</span><span class=o>=</span><span class=p>{</span><span class=nx>fallback</span><span class=p>}</span><span class=o>&gt;</span>
+      <span class=o>&lt;</span><span class=nx>SomeComponent</span> <span class=nx>onError</span><span class=o>=</span><span class=p>{()</span> <span class=p>=&gt;</span> <span class=nx>setHasError</span><span class=p>(</span><span class=kc>true</span><span class=p>)}</span> <span class=o>/&gt;</span>
+    <span class=o>&lt;</span><span class=err>/ErrorBoundary&gt;</span>
+  <span class=p>)</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>功能上是满足了，但还不够优雅：</p><ol><li>需要分别维护 <code>ErrorBoundary</code> 和顶层组件的 <code>hasError</code> 错误状态</li><li>每个子组件都需要做重复的处理，需要处理 <code>onError</code> 参数</li></ol><p>为了解决这个问题，需要考虑是否能够只处理 <code>ErrorBoundary</code> 的状态，让它也能处理异步错误？</p><h2 id=more>more</h2><p>因为 <code>ErrorBoundary</code> 只能够处理 React 生命周期中的错误，那对于异步错误，我们把它抛回重渲染的生命周期，是不是就能够重新被 <code>ErrorBoundary</code> 捕获了呢？<br>参考 <a href=https://github.com/facebook/react/issues/14981#issuecomment-468460187 target=_blank rel="noopener noreffer">这个方法</a>，我们在 <code>try/catch</code> 捕获到错误时，通过 <code>setState</code> 回调函数抛出错误，引发重新渲染，这样就可以被最近的 <code>ErrorBoundary</code> 捕获到</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=kr>const</span> <span class=nx>SomeComponent</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=kr>const</span> <span class=p>[</span><span class=nx>errorState</span><span class=p>,</span> <span class=nx>setErrorState</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useState</span><span class=p>()</span>
+
+  <span class=kr>const</span> <span class=nx>handleClick</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=k>try</span> <span class=p>{</span>
+      <span class=k>throw</span> <span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;error!!!&#39;</span><span class=p>)</span>
+    <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+      <span class=nx>setErrorState</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+        <span class=k>throw</span> <span class=nx>error</span>
+      <span class=p>})</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+
+  <span class=k>return</span> <span class=p>(</span>
+    <span class=o>&lt;</span><span class=nx>div</span> <span class=nx>onClick</span><span class=o>=</span><span class=p>{</span><span class=nx>handleClick</span><span class=p>}</span><span class=o>&gt;</span>
+      <span class=nx>some</span> <span class=nx>component</span>
+    <span class=o>&lt;</span><span class=err>/div&gt;</span>
+  <span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kr>const</span> <span class=nx>App</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=k>return</span> <span class=p>(</span>
+    <span class=o>&lt;</span><span class=nx>ErrorBoundary</span> <span class=nx>fallback</span><span class=o>=</span><span class=p>{</span><span class=o>&lt;&gt;</span><span class=nx>Something</span> <span class=nx>went</span> <span class=nx>wrong</span><span class=p>.</span><span class=o>&lt;</span><span class=err>/&gt;}&gt;</span>
+      <span class=o>&lt;</span><span class=nx>SomeComponent</span> <span class=o>/&gt;</span>
+    <span class=o>&lt;</span><span class=err>/ErrorBoundary&gt;</span>
+  <span class=p>)</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>为了提高复用能力，可以封装一个简单的 <code>hook</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=kr>const</span> <span class=nx>useShowError</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=kr>const</span> <span class=p>[</span><span class=nx>errorState</span><span class=p>,</span> <span class=nx>setErrorState</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useState</span><span class=p>()</span>
+
+  <span class=k>return</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=nx>setErrorState</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=k>throw</span> <span class=nx>error</span><span class=p>)</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kr>const</span> <span class=nx>SomeComponent</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=c1>// ...
+</span><span class=c1></span>  <span class=kr>const</span> <span class=nx>showError</span> <span class=o>=</span> <span class=nx>useShowError</span><span class=p>()</span>
+
+  <span class=kr>const</span> <span class=nx>handleClick</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=k>try</span> <span class=p>{</span>
+      <span class=k>throw</span> <span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;error!!!&#39;</span><span class=p>)</span>
+    <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+      <span class=nx>showError</span><span class=p>(</span><span class=nx>error</span><span class=p>)</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+
+  <span class=c1>// ...
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>到此为止，是不是已经很像 <code>react-error-boundary</code> 的使用方法了，那恭喜你也已经掌握了 React 错误处理需要了解的知识。</p><blockquote><p><a href=https://www.developerway.com/posts/how-to-handle-errors-in-react>https://www.developerway.com/posts/how-to-handle-errors-in-react</a></p></blockquote></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>本文于 2023-04-13 更新</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/%E6%8A%80%E6%9C%AF/>技术</a>,&nbsp;<a href=/tags/react/>React</a></section><section><span><a href=javascript:void(0); onclick=window.history.back();>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/%E6%88%91%E7%9A%842022%E5%B9%B4/ class=prev rel=prev title="我的 2022 年"><i class="fas fa-angle-left fa-fw"></i>我的 2022 年</a>
+<a href=/%E9%BB%84%E5%B1%B1%E5%9B%A2%E5%BB%BA/ class=next rel=next title=特种兵旅行>特种兵旅行<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2017 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://github.com/JiangBao target=_blank>酱鲍</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a rel="license external nofollow noopener noreffer" href=http://beian.miit.gov.cn/ target=_blank>浙ICP备20002824号</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i></a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/lib/lightgallery/lightgallery.min.css><style>.lg-toolbar .lg-icon::after{color:#999}</style><script type=text/javascript>window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":100},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type=text/javascript src="https://polyfill.io/v3/polyfill.min.js?features=html5shiv%2CElement.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign"></script><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/object-fit-images/ofi.min.js></script><script type=text/javascript src=/lib/lightgallery/lightgallery.min.js></script><script type=text/javascript src=/lib/lightgallery/lg-thumbnail.min.js></script><script type=text/javascript src=/lib/lightgallery/lg-zoom.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-TYXZ2Y2RHZ');</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-TYXZ2Y2RHZ" async></script></body></html>
