@@ -14,8 +14,7 @@
 一个记录展示 [作者](https://twitter.com/dandyweng) 兴趣爱好的个人项目，[APP](https://apps.apple.com/app/camarts-photography/id1504413909) 和 [网站](https://www.dandyweng.com/) 都做得很漂亮。有专注的事情且有产出，很棒的事情。
 
 * [俄罗斯科技公司 Yandex 被前雇员泄露 44.7GB 源代码](https://www.oschina.net/news/226005/yandex-source-code-leak)  
-俄罗斯科技公司 [Yandex](https://yandex.com/company/) 前雇员近日在一个流行的黑客论坛上以 Torrent 磁链的形式发布了总容量为 44.7GB 的源代码仓库。泄露者称这是 `Yandex git sources`，于 2022 年 7 月从公司窃取，包含了除反垃圾邮件规则之外的所有源代码。看了一下目录，搜索引擎、地图、邮件、支付...真的是底裤都没了。  
-{{<figure src="https://oscimg.oschina.net/oscnet/up-fe13fcfd99d8fe6f273eaa2339eb71b414a.png">}}
+俄罗斯科技公司 [Yandex](https://yandex.com/company/) 前雇员近日在一个流行的黑客论坛上以 Torrent 磁链的形式发布了总容量为 44.7GB 的源代码仓库。泄露者称这是 `Yandex git sources`，于 2022 年 7 月从公司窃取，包含了除反垃圾邮件规则之外的所有源代码。看了一下目录，搜索引擎、地图、邮件、支付...真的是底裤都没了。
 
 ## 其它的关注
 * [《三体》电视剧来了](https://v.qq.com/x/cover/mzc002007knmh3g/i0045u918s5.html)  
