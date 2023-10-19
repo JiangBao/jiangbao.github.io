@@ -11,7 +11,7 @@
 
 * [Catppuccin Theme: 高颜值的主题配色方案](https://github.com/catppuccin/catppuccin)  
 很多开发者对编辑器的颜值有很执着的追求，如果恰好你喜欢折腾，可以从这找找灵感，可用于 VSCode、JetBrains、Vim 等编辑器和 IDE。
-{{<figure src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/palette/demo.png">}}
+{{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/catppuccin.png">}}
 
 * [WebGL 理论基础教程](https://webglfundamentals.org/webgl/lessons/zh_cn/)  
 对于只从 MDN 入门过 WebGL 的我来说，这个基础教程很实用，如果有同样想学习前端 3D 的小伙伴，看这个入门还是很不错的。
