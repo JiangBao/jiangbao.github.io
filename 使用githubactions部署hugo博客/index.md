@@ -1,4 +1,4 @@
-# 使用 Gitub Actions 部署 Hugo 博客
+# 使用 Github Actions 部署 Hugo 博客
 
 前不久将博客[从 hexo 转到了 hugo](https://jiangbao.github.io/%E4%BB%8Ehexo%E8%BD%AC%E5%88%B0hugo/)，之前的文章简单介绍了 hugo 的基本使用，这一阶段我发布新文章的流程是这样的：  
 
