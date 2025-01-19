@@ -5,6 +5,14 @@
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/sunset20240914.jpg" title="夕阳时刻">}}
 
 ## 代码那些事
+* [得物商家客服从 Electron 迁移到 Tauri 的技术实践](https://mp.weixin.qq.com/s/UxmJxU4-fv9GeRxl2fzOGw)  
+数据提升很明显，能够看出 Tauri 相比 Electron 的明显优势，但同时生态问题、使用 Rust 的技术挑战等问题，依然是很多团队考虑的。  
+Electron 目前在桌面端有足够多的应用，社区比较完善，大部分团队会选择在此基础上调优，而非如此激进地做技术选型改变，不过有这样成熟团队的迁移分享，应该能给其它项目带来很多参考。
+  * 包体积 7M，Electron 80M 下降91.25%
+  * 平均内存占用 249M Electron 497M 下降49.9%
+  * 平均 CPU 占用百分比 20%，Electron 63.5% 下降 63.19%
+
+
 * [ECMAScript 2024 新特性解读](https://mp.weixin.qq.com/s/sXQeojB36dAYuYsmS1clfA)  
 [ECMAScript 2024](https://tc39.es/ecma262/2024/) 语言规范的最终版本于 6 月 26 日获得批准，一起看看这个版本新增了哪些提案吧。
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/ecma2024.png">}}
