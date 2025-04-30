@@ -1,4 +1,4 @@
-# 关于『酱鲍』
+# 关于「酱鲍」
 
 <!-- {{<figure src="/images/bg-about.jpg" width="400">}} -->
 
