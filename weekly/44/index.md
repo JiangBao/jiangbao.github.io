@@ -1,5 +1,3 @@
-# 兴趣周刊(第 44 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/james38388.jpg" title="詹姆斯超越贾巴尔，成为 NBA 历史得分王" width="80%">}}
 <!--more-->
 

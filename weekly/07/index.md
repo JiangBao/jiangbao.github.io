@@ -1,5 +1,3 @@
-# 兴趣周刊(第 7 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/v2-95fea5d78ff2db38cc0b73434f84fe95_1440w.jpeg">}}

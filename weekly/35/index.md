@@ -1,5 +1,3 @@
-# 兴趣周刊(第 35 期)
-
 {{<figure src="https://pbs.twimg.com/media/FewZdPLUUAIJJEJ?format=jpg&name=large" title="s12 小组赛首轮后 LPL 现状">}}
 <!--more-->
 

@@ -1,5 +1,3 @@
-# ⚠️Jest Antd useLayoutEffect Warning
-
 
 <!--more-->
 **场景：** 使用 [antd](https://github.com/ant-design/ant-design) 二次封装的组件库，使用 [jest](https://jestjs.io/zh-Hans/) 进行组件单元测试

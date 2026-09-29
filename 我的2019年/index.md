@@ -1,5 +1,3 @@
-# 我的 2019 年
-
 ![我的2019](https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/%E6%88%91%E7%9A%842019.png)
 
 <!-- more -->

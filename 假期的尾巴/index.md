@@ -1,5 +1,3 @@
-# 假期的尾巴
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/paopaoanji2023.jpg" title="抓住假期的尾巴，去山里发呆">}}

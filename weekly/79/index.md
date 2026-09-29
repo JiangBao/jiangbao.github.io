@@ -1,5 +1,3 @@
-# 兴趣周刊(第 79 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/250527wmls.jpg" title="五月天演唱会，拍到点复古代码元素">}}

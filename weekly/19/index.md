@@ -1,5 +1,3 @@
-# 兴趣周刊(第 19 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/2022_happy_new_year.jpeg" title="新年快乐">}}

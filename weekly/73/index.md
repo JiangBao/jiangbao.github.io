@@ -1,5 +1,3 @@
-# 兴趣周刊(第 73 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/xihu20241007.jpg" title="假期雨西湖">}}

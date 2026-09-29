@@ -1,5 +1,3 @@
-# 兴趣周刊(第 18 期)
-
 
 <!--more-->
 {{<figure src="https://rs1.huanqiucdn.cn/dp/api/files/imageDir/1a4354ef7a87aaa1393ac26c606e243d.png?w=1260" title="汤加海底火山爆发">}}

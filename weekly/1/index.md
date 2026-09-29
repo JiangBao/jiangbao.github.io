@@ -1,5 +1,3 @@
-# 兴趣周刊(第 1 期)
-
 {{<figure src="https://s.yimg.com/os/creatr-uploaded-images/2021-04/14173750-9c73-11eb-bfeb-1f8271db0890" title="苹果春季新品发布会" >}}
 <!--more-->
 

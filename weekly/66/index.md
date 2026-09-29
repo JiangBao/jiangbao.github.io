@@ -1,5 +1,3 @@
-# 兴趣周刊(第 66 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/chunjie2024.jpg" title="新的一年，平安喜乐">}}

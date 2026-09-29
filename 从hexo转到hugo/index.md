@@ -1,5 +1,3 @@
-# 从 Hexo 转到 Hugo
-
 {{< figure src="https://d33wubrfki0l68.cloudfront.net/c38c7334cc3f23585738e40334284fddcaf03d5e/2e17c/images/hugo-logo-wide.svg" >}}
 <!--more-->
 > Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again.  

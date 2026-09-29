@@ -1,5 +1,3 @@
-# 人生如逆旅
-
 <!--more-->
 <div align=center>
 

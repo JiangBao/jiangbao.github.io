@@ -1,1 +1,68 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>css - 标签 - (☉_☉)</title><link>https://jiangbao.github.io/tags/css/</link><description>css - 标签 - (☉_☉)</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 20 May 2017 10:41:13 +0800</lastBuildDate><atom:link href="https://jiangbao.github.io/tags/css/" rel="self" type="application/rss+xml"/><item><title>CSS 圣杯布局实践</title><link>https://jiangbao.github.io/css%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80%E5%AE%9E%E8%B7%B5/</link><pubDate>Sat, 20 May 2017 10:41:13 +0800</pubDate><author>作者</author><guid>https://jiangbao.github.io/css%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80%E5%AE%9E%E8%B7%B5/</guid><description>圣杯布局和双飞翼布局都是平时开发中比较常用的页面布局，两者核心都一样，本质上都是三栏布局，此文记录自己平时对圣杯布局的实践。 圣杯布局题图所示</description></item><item><title>CSS 水平垂直居中常用方式</title><link>https://jiangbao.github.io/css%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E5%B8%B8%E7%94%A8%E6%96%B9%E5%BC%8F/</link><pubDate>Mon, 15 May 2017 17:24:24 +0800</pubDate><author>作者</author><guid>https://jiangbao.github.io/css%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E5%B8%B8%E7%94%A8%E6%96%B9%E5%BC%8F/</guid><description><![CDATA[水平居中 1. 行内元素 1 2 3 &lt;body&gt; &lt;div class=&#34;center-wrap&#34;&gt;水平居中&lt;/div&gt; &lt;/body&gt; 1 2 3 .center-wrap { text-align: center; }]]></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Css on 酱鲍</title><link>https://jiangbao.github.io/tags/css/</link><description>Recent content in Css on 酱鲍</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sat, 20 May 2017 10:41:13 +0800</lastBuildDate><atom:link href="https://jiangbao.github.io/tags/css/index.xml" rel="self" type="application/rss+xml"/><item><title>CSS 圣杯布局实践</title><link>https://jiangbao.github.io/css%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80%E5%AE%9E%E8%B7%B5/</link><pubDate>Sat, 20 May 2017 10:41:13 +0800</pubDate><guid>https://jiangbao.github.io/css%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80%E5%AE%9E%E8%B7%B5/</guid><description>&lt;figure class="content-figure"&gt;
+ &lt;button type="button" class="figure-open" data-lightbox-src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80.png" data-lightbox-alt="文章配图" aria-label="放大图片：文章配图"&gt;&lt;img src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80.png" alt="文章配图" loading="lazy" decoding="async"&gt;&lt;/button&gt;
+ 
+&lt;/figure&gt;
+
+&lt;p&gt;圣杯布局和双飞翼布局都是平时开发中比较常用的页面布局，两者核心都一样，本质上都是三栏布局，此文记录自己平时对圣杯布局的实践。&lt;/p&gt;</description></item><item><title>CSS 水平垂直居中常用方式</title><link>https://jiangbao.github.io/css%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E5%B8%B8%E7%94%A8%E6%96%B9%E5%BC%8F/</link><pubDate>Mon, 15 May 2017 17:24:24 +0800</pubDate><guid>https://jiangbao.github.io/css%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E5%B8%B8%E7%94%A8%E6%96%B9%E5%BC%8F/</guid><description>&lt;figure class="content-figure"&gt;
+ &lt;button type="button" class="figure-open" data-lightbox-src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/CSS%E5%B1%85%E4%B8%AD.png" data-lightbox-alt="文章配图" aria-label="放大图片：文章配图"&gt;&lt;img src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/CSS%E5%B1%85%E4%B8%AD.png" alt="文章配图" loading="lazy" decoding="async"&gt;&lt;/button&gt;
+ 
+&lt;/figure&gt;
+
+&lt;h2 id="水平居中"&gt;水平居中&lt;/h2&gt;
+&lt;h3 id="1-行内元素"&gt;1. 行内元素&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;center-wrap&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;水平居中&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-css" data-lang="css"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;center-wrap&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;text-align&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;center&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="2-确定宽度块级元素"&gt;2. 确定宽度块级元素&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;center-wrap&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;水平居中&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-css" data-lang="css"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;center-wrap&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;border&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="kc"&gt;solid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;600&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;margin&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="kc"&gt;auto&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="3-未知宽度块级元素"&gt;3. 未知宽度块级元素&lt;/h3&gt;
+&lt;h4 id="table"&gt;table&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;display: table&lt;/code&gt;配合&lt;code&gt;margin: 0 auto&lt;/code&gt;&lt;/p&gt;</description></item></channel></rss>

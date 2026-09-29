@@ -1,5 +1,3 @@
-# Deno1.0
-
 {{< figure src="https://deno.land/v1_wide.jpg" >}}
 虽然之前了解 Node.js 原作者Ry针对 Node 存在的问题，一直在折腾 Deno，但只简单看过前期版本，也不知道到底什么进度。今天看到[ Deno 发布了 v1.0 正式版本](https://deno.land/v1)，来简单入门一下，等待后续跟进🦕
 

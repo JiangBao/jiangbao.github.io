@@ -1,5 +1,3 @@
-# 兴趣周刊(第 38 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/s12final03.jpeg" title="Deft 十年一冠">}}
 <!--more-->
 

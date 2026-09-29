@@ -1,5 +1,3 @@
-# 兴趣周刊(第 21 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/eldenring.jpeg" title="最近大热的艾尔登法环">}}

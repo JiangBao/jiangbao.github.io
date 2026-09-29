@@ -1,5 +1,3 @@
-# 兴趣周刊(第 41 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/argentina-2022-champion.jpeg" title="阿根廷夺冠，梅西生涯首捧大力神杯 🏆">}}
 <!--more-->
 

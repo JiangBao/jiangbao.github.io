@@ -1,5 +1,3 @@
-# 兴趣周刊(第 52 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/beigaofeng-20230604.jpg" title="早起爬山，远眺西湖">}}

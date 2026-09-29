@@ -1,5 +1,3 @@
-# 兴趣周刊(第 40 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/20221130snow.jpg" title="2022 年冬，杭州初雪" >}}
 
 <!--more-->

@@ -1,5 +1,3 @@
-# 糟糕的 2020 年开局😷
-
 <div align=center><img width=500 height=500 src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/HupuBBS_200127070037-1242822577.png" /></div>
 
 😷😷😷

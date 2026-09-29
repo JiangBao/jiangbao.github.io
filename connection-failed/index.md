@@ -1,5 +1,3 @@
-# Connection failed
-
 今天将新购买的个人服务器数据库升级 MySQL8.0，出现了本地 Navicat Premium 无法连接的问题。
 
 <!--more-->

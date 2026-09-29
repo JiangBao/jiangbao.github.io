@@ -1,5 +1,3 @@
-# 兴趣周刊(第 68 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/xiangjiang0404.jpg" title="雨天的湘江边，有种赛博朋克的感觉">}}

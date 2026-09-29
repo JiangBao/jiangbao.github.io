@@ -1,5 +1,3 @@
-# 兴趣周刊(第 9 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/tokyo2020_subingtian.jpeg" title="2021's TOKYO 2020, 印象最深的一幕, 苏炳添站在百米决赛" >}}

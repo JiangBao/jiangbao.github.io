@@ -1,5 +1,3 @@
-# 兴趣周刊(第 50 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/zelda_tearsofkingdom.jpeg" title="塞尔达传说：王国之泪">}}
 <!--more-->
 

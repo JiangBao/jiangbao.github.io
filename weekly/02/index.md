@@ -1,5 +1,3 @@
-# 兴趣周刊(第 2 期)
-
 {{<figure src="https://img.36krcdn.com/20210428/v2_291eafc6a9384203a9bfd7ac45ff0b82_img_000">}}
 <!--more-->
 

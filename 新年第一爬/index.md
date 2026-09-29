@@ -1,5 +1,3 @@
-# 新年第一爬
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/20250101.jpg" title="2025 第一天，宝石山远眺西湖">}}

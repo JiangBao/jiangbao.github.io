@@ -1,5 +1,3 @@
-# 兴趣周刊(第 4 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/%E5%A4%A9%E9%97%AE%E4%B8%80%E5%8F%B7.jpeg" title="天问一号着陆火星">}}
 <!--more-->
 

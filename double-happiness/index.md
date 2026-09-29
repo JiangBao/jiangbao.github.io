@@ -1,5 +1,3 @@
-# Double happiness
-
 
 <!--more-->
 

@@ -1,5 +1,3 @@
-# 兴趣周刊(第 65 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/long-live-happiness.jpg" title="不管几岁快乐万岁">}}

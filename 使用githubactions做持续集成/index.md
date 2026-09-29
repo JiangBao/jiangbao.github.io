@@ -1,5 +1,3 @@
-# 使用 Github Actions 做持续集成
-
 之前团队代码托管在 [Gitee](https://gitee.com/)，自动化流程是 git 仓库 webhook + jenkins 那一套。最近部分业务迁移到 github，折腾一下，使用 [Github Actions](https://github.com/features/actions) 做自动化流程。因为自己以前在 Github 代码使用的是 Travis CI，所以这次简单记录一下 Github Actions 的使用。
 
 ## 了解

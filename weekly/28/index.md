@@ -1,5 +1,3 @@
-# 兴趣周刊(第 28 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/fujian003.jpeg" title="福建舰下水">}}

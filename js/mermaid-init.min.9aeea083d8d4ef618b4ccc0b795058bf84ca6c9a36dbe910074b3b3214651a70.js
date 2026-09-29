@@ -1,0 +1,1 @@
+(()=>{if(!window.mermaid)return;mermaid.initialize({startOnLoad:!1,securityLevel:"strict",theme:"neutral"}),mermaid.init(0[0],document.querySelectorAll(".mermaid"))})()

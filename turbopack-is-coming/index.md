@@ -1,5 +1,3 @@
-# Turbopack Is Coming
-
 {{<figure src="https://vercel.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F5xISJZLpC7OKEDNRII3r8T%2F491842a26bbc8ed1a976393dc42e2755%2FFrame_427319031.png&w=3840&q=75">}}
 <!--more-->
 

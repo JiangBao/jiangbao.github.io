@@ -1,5 +1,3 @@
-# 兴趣周刊(第 42 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/zhongguoqitan.jpg" title="中国奇谭 - 小妖怪的夏天">}}
 <!--more-->
 

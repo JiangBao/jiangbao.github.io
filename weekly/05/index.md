@@ -1,5 +1,3 @@
-# 兴趣周刊(第 5 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/2021msi.jpeg" title="2021 MSI rng夺冠之夜">}}
 <!--more-->
 

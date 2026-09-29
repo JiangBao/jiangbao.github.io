@@ -1,5 +1,3 @@
-# 兴趣周刊(第 72 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/sunset20240914.jpg" title="夕阳时刻">}}

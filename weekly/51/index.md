@@ -1,5 +1,3 @@
-# 兴趣周刊(第 51 期)
-
 
 <!--more-->
 {{<figure src="https://p4.itc.cn/q_70/images03/20230521/4b88c7a79d114973a98779fd06befebc.jpeg" title="2023 MSI, LPL 会师决赛">}}

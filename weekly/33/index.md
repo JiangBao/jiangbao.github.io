@@ -1,5 +1,3 @@
-# 兴趣周刊(第 33 期)
-
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/dakao-shexian.jpg" title="电视剧《大考》，熟悉的老家画面">}}
 

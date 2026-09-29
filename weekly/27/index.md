@@ -1,5 +1,3 @@
-# 兴趣周刊(第 27 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/msi2022champion.jpeg" title="RNG 2022 MSI 夺冠">}}

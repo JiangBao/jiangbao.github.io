@@ -1,5 +1,3 @@
-# 兴趣周刊(第 13 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/2021_s11_edg.jpeg" title="2021 S11, EDG 夺冠">}}

@@ -1,5 +1,3 @@
-# 第二人生
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/20220309.png">}}

@@ -1,5 +1,3 @@
-# 兴趣周刊(第 34 期)
-
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/huzhou-20220924.jpg" title="一次有趣的湖州之旅">}}
 

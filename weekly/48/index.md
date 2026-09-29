@@ -1,5 +1,3 @@
-# 兴趣周刊(第 48 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/camping0408.jpg" title="周末露营随手一拍">}}
 <!--more-->
 *最近因为突击项目，忙得恍惚，周刊耽误了不少时间*

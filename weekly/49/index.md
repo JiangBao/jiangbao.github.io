@@ -1,5 +1,3 @@
-# 兴趣周刊(第 49 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/slamdunkmovie.jpeg">}}
 <!--more-->
 

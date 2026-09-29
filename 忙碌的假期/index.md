@@ -1,5 +1,3 @@
-# 忙碌的假期
-
 {{<figure src="/images/20181006-shuyuan.jpeg">}}
 
 <!--more-->

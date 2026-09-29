@@ -1,5 +1,3 @@
-# 兴趣周刊(第 47 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/20230326-DSC00837.jpg" title="无聊就去看看小动物吧，它们也很无聊 🐶">}}
 <!--more-->
 

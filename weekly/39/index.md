@@ -1,5 +1,3 @@
-# 兴趣周刊(第 39 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/2022fifalaeeb.jpg" title="史上最贵世界杯开幕 ⚽">}}
 <!--more-->
 

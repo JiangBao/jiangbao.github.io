@@ -1,5 +1,3 @@
-# 兴趣周刊(第 46 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/DSC00534.jpg">}}
 <!--more-->
 

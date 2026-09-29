@@ -1,5 +1,3 @@
-# 关于「酱鲍」
-
 <!-- {{<figure src="/images/bg-about.jpg" width="400">}} -->
 
 <div align=center>

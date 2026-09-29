@@ -1,5 +1,3 @@
-# 兴趣周刊(第 71 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/summer202408.jpg" title="杭州喜提 8 月全国最热省份 🥵">}}

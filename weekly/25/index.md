@@ -1,5 +1,3 @@
-# 兴趣周刊(第 25 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/keyboard-after.jpg" title="更新了键帽配色 🎹">}}

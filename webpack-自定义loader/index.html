@@ -1,12 +1,8 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Webpack - 自定义 loader - (☉_☉)</title><meta name=Description content><meta property="og:title" content="Webpack - 自定义 loader"><meta property="og:description" content><meta property="og:type" content="article"><meta property="og:url" content="https://jiangbao.github.io/webpack-%E8%87%AA%E5%AE%9A%E4%B9%89loader/"><meta property="article:published_time" content="2020-07-23T19:02:54+08:00"><meta property="article:modified_time" content="2020-07-23T19:02:54+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Webpack - 自定义 loader"><meta name=twitter:description content><meta name=application-name content="(☉_☉)"><meta name=apple-mobile-web-app-title content="(☉_☉)"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://jiangbao.github.io/webpack-%E8%87%AA%E5%AE%9A%E4%B9%89loader/><link rel=prev href=https://jiangbao.github.io/%E6%B1%B4%E4%BA%AC%E4%B9%8B%E5%9B%B4/><link rel=next href=https://jiangbao.github.io/webpack-%E8%87%AA%E5%AE%9A%E4%B9%89plugin/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Webpack - 自定义 loader","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/jiangbao.github.io\/webpack-%E8%87%AA%E5%AE%9A%E4%B9%89loader\/"},"genre":"posts","keywords":"JavaScript, webpack","wordcount":1247,"url":"https:\/\/jiangbao.github.io\/webpack-%E8%87%AA%E5%AE%9A%E4%B9%89loader\/","datePublished":"2020-07-23T19:02:54+08:00","dateModified":"2020-07-23T19:02:54+08:00","author":{"@type":"Person","name":"酱鲍"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':('auto'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'auto'==='dark'))&&document.body.setAttribute('theme','dark');</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=(☉_☉)>(☉_☉)</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/weekly title=兴趣周刊>周刊 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/about/ title=关于酱鲍>关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a><span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span></span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=(☉_☉)>(☉_☉)</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a><span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/>文章</a><a class=menu-item href=/weekly title=兴趣周刊>周刊</a><a class=menu-item href=/categories/>分类</a><a class=menu-item href=/about/ title=关于酱鲍>关于</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Webpack - 自定义 loader</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=https://github.com/JiangBao title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>酱鲍</a></span>&nbsp;
-<span class=post-category>收录于<a href=/categories/%E6%8A%80%E6%9C%AF/>
-<i class="far fa-folder fa-fw"></i>技术</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-07-23>2020-07-23</time>&nbsp;
-<i class="fas fa-pencil-alt fa-fw"></i>约 1247 字&nbsp;
-<i class="far fa-clock fa-fw"></i>预计阅读 3 分钟&nbsp;</div></div><div class="details toc" id=toc-static><div class="details-summary toc-title"><span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#背景>背景</a></li><li><a href=#loader-使用>loader 使用</a></li><li><a href=#最简单的自定义-loader>最简单的自定义 loader</a></li><li><a href=#raw-模式>raw 模式</a></li><li><a href=#pitch>pitch</a></li><li><a href=#参考>参考</a></li></ul></nav></div></div><div class=content id=content><figure><img src=https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/webpack.png></figure><blockquote><p>loader 是导出为一个函数的 node 模块。该函数在 loader 转换资源的时候调用。给定的函数将调用<a href=https://www.webpackjs.com/api/loaders/ target=_blank rel="noopener noreffer">loader API</a>，并通过 <code>this</code> 上下文访问。</p></blockquote><h2 id=背景>背景</h2><p>webpack 自身只能解析 JS 和 JSON 文件，无法理解其它类型的的文件模块，当我们需要处理 CSS、图片等非 JS 资源时，需要使用 <code>loader</code> 将之转换为 webpack 核心能够理解的形式。loader 本质是一个函数，接收待处理的资源模块，输出符合 webpack 处理规范的的内容。</p><h2 id=loader-使用>loader 使用</h2><p>以简单的 <code>css</code> 模块处理为例，我们使用 <code>style-loader</code> 和 <code>css-loader</code> 这两个 loader，类似如下的 webpack 配置：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#ffffff" media="(prefers-color-scheme: light)"><meta name=theme-color content="#171717" media="(prefers-color-scheme: dark)"><title>Webpack - 自定义 loader · 酱鲍</title><meta name=description content><link rel=canonical href=https://jiangbao.github.io/webpack-%E8%87%AA%E5%AE%9A%E4%B9%89loader/><link rel=icon href=/favicon.ico><script>try{const e=localStorage.getItem("site-theme");(e==="light"||e==="dark")&&(document.documentElement.dataset.theme=e)}catch{}</script><link rel=preconnect href=https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com crossorigin><link rel=stylesheet href=https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/fonts/lxgw-wenkai-screen/1.522.0/result.css media=print onload='this.media="all"'><noscript><link rel=stylesheet href=https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/fonts/lxgw-wenkai-screen/1.522.0/result.css></noscript><link rel=stylesheet href=/css/blog.min.e9a33741deaf5a7ca2e80664add8370e670adef1b11cd1a14489ce73440b1735.css integrity="sha256-6aM3Qd6vWnyi6AZkrdg3DmcK3vGxHNGhRInOc0QLFzU="></head><body class=content-page><a class=skip-link href=#main>跳到正文</a><header class="site-header shell"><a class=site-mark href=/ aria-label=返回首页>(☉_☉)</a><nav class=site-nav aria-label=主导航><a href=/posts/ aria-current=page>文章</a>
+<a href=/timeline/>随记</a>
+<a href=/about/>关于</a>
+<button class=nav-icon type=button data-search-open aria-label=搜索 title=搜索><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
+<button class=nav-icon type=button data-theme-toggle aria-label=切换暗黑主题 title=切换主题><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.3A8.5 8.5.0 018.7 3.8a8.6 8.6.0 1011.5 11.5z"/></svg></button></nav></header><main id=main><article class=single-article><header class="article-header shell"><div class=article-header-inner><h1>Webpack - 自定义 loader</h1><div class=article-meta><time datetime=2020-07-23>2020 年 07 月 23 日</time></div></div></header><div class="article-content shell"><div class="article-prose prose"><figure class=content-figure><button type=button class=figure-open data-lightbox-src=https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/webpack.png data-lightbox-alt=文章配图 aria-label=放大图片：文章配图><img loading=eager fetchpriority=high src=https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/webpack.png alt=文章配图 decoding=async></button></figure><blockquote><p>loader 是导出为一个函数的 node 模块。该函数在 loader 转换资源的时候调用。给定的函数将调用<a href=https://www.webpackjs.com/api/loaders/>loader API</a>，并通过 <code>this</code> 上下文访问。</p></blockquote><h2 id=背景>背景</h2><p>webpack 自身只能解析 JS 和 JSON 文件，无法理解其它类型的的文件模块，当我们需要处理 CSS、图片等非 JS 资源时，需要使用 <code>loader</code> 将之转换为 webpack 核心能够理解的形式。loader 本质是一个函数，接收待处理的资源模块，输出符合 webpack 处理规范的的内容。</p><h2 id=loader-使用>loader 使用</h2><p>以简单的 <code>css</code> 模块处理为例，我们使用 <code>style-loader</code> 和 <code>css-loader</code> 这两个 loader，类似如下的 webpack 配置：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -18,19 +14,19 @@
 </span><span class=lnt>10
 </span><span class=lnt>11
 </span><span class=lnt>12
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
-  <span class=c1>//...
-</span><span class=c1></span>  <span class=nx>module</span><span class=o>:</span> <span class=p>{</span>
-    <span class=nx>rules</span><span class=o>:</span> <span class=p>[</span>
-      <span class=nx>test</span><span class=o>:</span> <span class=sr>/\.css$/</span><span class=p>,</span>
-      <span class=c1>// css-loader: 解析 CSS 文件，以字符串形式打包到 js 文件
-</span><span class=c1></span>      <span class=c1>// style-loader: 把 js 里的样式代码插入到 html
-</span><span class=c1></span>      <span class=nx>use</span><span class=o>:</span> <span class=p>[</span><span class=s1>&#39;style-loader&#39;</span><span class=p>,</span> <span class=s1>&#39;css-loader&#39;</span><span class=p>],</span>
-    <span class=p>]</span>
-  <span class=p>}</span>
-  <span class=c1>//...
-</span><span class=c1></span><span class=p>};</span>
-</code></pre></td></tr></table></div></div><p>loader 执行顺序是从后往前，先执行 <code>css-loader</code>，再将其执行结果交给 <code>style-loader</code> 处理。由此可以得到自定义 loader 时需要遵守的几个基本原则：</p><ul><li>单一职责：每个 loader 只做一个任务，不仅易维护，也可以在更多场景链式调用。</li><li>链式传递：资源文件传入第一个 loader，后续 loader 接受上一个 loader 返回的处理结果。这意味着 loader 不一定要输出 js，只要下一个 loader 可以处理这个输出，这个 loader 就可以返回任意类型的模块。</li><li>逆向调用：体现在上面的例子就是 use 配置项从右往左执行，这与 js 的函数式编程而非管道流相关。</li></ul><h2 id=最简单的自定义-loader>最简单的自定义 loader</h2><p>编写一个 loader，实现功能：替换所有 <code>.txt</code> 文件中以 <code>[name]</code> 标记的关键词。<a href=https://github.com/JiangBao/webpack-notes/tree/main/loader/replace target=_blank rel="noopener noreffer">gitub 仓库</a><br><code>replace-keyword-loader.js</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>//...
+</span></span></span><span class=line><span class=cl>  <span class=nx>module</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>rules</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>      <span class=nx>test</span><span class=o>:</span> <span class=sr>/\.css$/</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// css-loader: 解析 CSS 文件，以字符串形式打包到 js 文件
+</span></span></span><span class=line><span class=cl>      <span class=c1>// style-loader: 把 js 里的样式代码插入到 html
+</span></span></span><span class=line><span class=cl>      <span class=nx>use</span><span class=o>:</span> <span class=p>[</span><span class=s1>&#39;style-loader&#39;</span><span class=p>,</span> <span class=s1>&#39;css-loader&#39;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=c1>//...
+</span></span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><p>loader 执行顺序是从后往前，先执行 <code>css-loader</code>，再将其执行结果交给 <code>style-loader</code> 处理。由此可以得到自定义 loader 时需要遵守的几个基本原则：</p><ul><li>单一职责：每个 loader 只做一个任务，不仅易维护，也可以在更多场景链式调用。</li><li>链式传递：资源文件传入第一个 loader，后续 loader 接受上一个 loader 返回的处理结果。这意味着 loader 不一定要输出 js，只要下一个 loader 可以处理这个输出，这个 loader 就可以返回任意类型的模块。</li><li>逆向调用：体现在上面的例子就是 use 配置项从右往左执行，这与 js 的函数式编程而非管道流相关。</li></ul><h2 id=最简单的自定义-loader>最简单的自定义 loader</h2><p>编写一个 loader，实现功能：替换所有 <code>.txt</code> 文件中以 <code>[name]</code> 标记的关键词。<a href=https://github.com/JiangBao/webpack-notes/tree/main/loader/replace>gitub 仓库</a><br><code>replace-keyword-loader.js</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -39,16 +35,16 @@
 </span><span class=lnt>7
 </span><span class=lnt>8
 </span><span class=lnt>9
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=c1>// 利用 loader-utils 工具包获取传入的参数
-</span><span class=c1></span><span class=kr>const</span> <span class=p>{</span> <span class=nx>getOptions</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;loader-utils&#39;</span><span class=p>);</span>
-
-<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(</span><span class=nx>source</span><span class=p>)</span> <span class=p>{</span>
-  <span class=kr>const</span> <span class=nx>options</span> <span class=o>=</span> <span class=nx>getOptions</span><span class=p>(</span><span class=k>this</span><span class=p>);</span>
-  <span class=nx>source</span> <span class=o>=</span> <span class=nx>source</span><span class=p>.</span><span class=nx>replace</span><span class=p>(</span><span class=sr>/\[name\]/g</span><span class=p>,</span> <span class=nx>options</span><span class=p>.</span><span class=nx>keyword</span><span class=p>);</span>
-
-  <span class=k>return</span> <span class=sb>`export default </span><span class=si>${</span><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span><span class=nx>source</span><span class=p>)</span><span class=si>}</span><span class=sb>`</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></td></tr></table></div></div><p><code>webpack.config.js</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=c1>// 利用 loader-utils 工具包获取传入的参数
+</span></span></span><span class=line><span class=cl><span class=kr>const</span> <span class=p>{</span> <span class=nx>getOptions</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;loader-utils&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(</span><span class=nx>source</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>options</span> <span class=o>=</span> <span class=nx>getOptions</span><span class=p>(</span><span class=k>this</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nx>source</span> <span class=o>=</span> <span class=nx>source</span><span class=p>.</span><span class=nx>replace</span><span class=p>(</span><span class=sr>/\[name\]/g</span><span class=p>,</span> <span class=nx>options</span><span class=p>.</span><span class=nx>keyword</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=sb>`export default </span><span class=si>${</span><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span><span class=nx>source</span><span class=p>)</span><span class=si>}</span><span class=sb>`</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>webpack.config.js</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -68,27 +64,27 @@
 </span><span class=lnt>18
 </span><span class=lnt>19
 </span><span class=lnt>20
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=kr>const</span> <span class=nx>path</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;path&#39;</span><span class=p>);</span>
-
-<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
-  <span class=c1>//...
-</span><span class=c1></span>  <span class=nx>module</span><span class=o>:</span> <span class=p>{</span>
-    <span class=nx>rules</span><span class=o>:</span> <span class=p>[</span>
-      <span class=p>{</span>
-        <span class=nx>test</span><span class=o>:</span> <span class=sr>/\.txt$/</span><span class=p>,</span>
-        <span class=nx>use</span><span class=o>:</span> <span class=p>[</span>
-          <span class=p>{</span>
-            <span class=nx>loader</span><span class=o>:</span> <span class=nx>path</span><span class=p>.</span><span class=nx>resolve</span><span class=p>(</span><span class=s1>&#39;./src/replace-keyword-loader.js&#39;</span><span class=p>),</span>
-            <span class=nx>options</span><span class=o>:</span> <span class=p>{</span>
-              <span class=nx>keyword</span><span class=o>:</span> <span class=s1>&#39;JiangBao&#39;</span>
-            <span class=p>}</span>
-          <span class=p>}</span>
-        <span class=p>]</span>
-      <span class=p>}</span>
-    <span class=p>]</span>
-  <span class=p>},</span>
-<span class=p>};</span>
-</code></pre></td></tr></table></div></div><h2 id=raw-模式>raw 模式</h2><p>之前的基础示例中，资源文件会默认转化为 UTF-8 字符串，然后传给 loader，但是在一些图片、音频、视频资源下，使用字符串就不合适了，这时候可以接收原文件的 <code>Buffer</code>，设置导出 <code>raw</code> 字段为 <code>true</code> 即可开启 buffer 类型的参数。<br>一个简单的例子：实现最简化的 <code>url-loader</code> 功能，将图片转为 base64 编码格式。<a href=https://github.com/JiangBao/webpack-notes/tree/main/loader/raw target=_blank rel="noopener noreffer">github 仓库</a><br><code>raw-loader.js</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kr>const</span> <span class=nx>path</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;path&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>//...
+</span></span></span><span class=line><span class=cl>  <span class=nx>module</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>rules</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>test</span><span class=o>:</span> <span class=sr>/\.txt$/</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>use</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>loader</span><span class=o>:</span> <span class=nx>path</span><span class=p>.</span><span class=nx>resolve</span><span class=p>(</span><span class=s1>&#39;./src/replace-keyword-loader.js&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nx>options</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>              <span class=nx>keyword</span><span class=o>:</span> <span class=s1>&#39;JiangBao&#39;</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>]</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=raw-模式>raw 模式</h2><p>之前的基础示例中，资源文件会默认转化为 UTF-8 字符串，然后传给 loader，但是在一些图片、音频、视频资源下，使用字符串就不合适了，这时候可以接收原文件的 <code>Buffer</code>，设置导出 <code>raw</code> 字段为 <code>true</code> 即可开启 buffer 类型的参数。<br>一个简单的例子：实现最简化的 <code>url-loader</code> 功能，将图片转为 base64 编码格式。<a href=https://github.com/JiangBao/webpack-notes/tree/main/loader/raw>github 仓库</a><br><code>raw-loader.js</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -99,18 +95,18 @@
 </span><span class=lnt> 9
 </span><span class=lnt>10
 </span><span class=lnt>11
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=kr>const</span> <span class=p>{</span> <span class=nx>getOptions</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;loader-utils&#39;</span><span class=p>);</span>
-
-<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(</span><span class=nx>source</span><span class=p>)</span> <span class=p>{</span>
-  <span class=kr>const</span> <span class=nx>options</span> <span class=o>=</span> <span class=nx>getOptions</span><span class=p>(</span><span class=k>this</span><span class=p>);</span>
-  <span class=kr>const</span> <span class=nx>mimetype</span> <span class=o>=</span> <span class=nx>options</span><span class=p>.</span><span class=nx>mimetype</span> <span class=o>||</span> <span class=s1>&#39;&#39;</span><span class=p>;</span>
-
-  <span class=k>return</span> <span class=sb>`export default </span><span class=si>${</span><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span><span class=sb>`data:</span><span class=si>${</span><span class=nx>mimetype</span><span class=si>}</span><span class=sb>;base64,</span><span class=si>${</span><span class=nx>source</span><span class=p>.</span><span class=nx>toString</span><span class=p>(</span><span class=s1>&#39;base64&#39;</span><span class=p>)</span><span class=si>}</span><span class=sb>`</span><span class=p>)</span><span class=si>}</span><span class=sb>`</span><span class=p>;</span>
-<span class=p>}</span>
-
-<span class=c1>// 开启 buffer 类型文件格式
-</span><span class=c1></span><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span><span class=p>.</span><span class=nx>raw</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
-</code></pre></td></tr></table></div></div><p><code>webpack.config.js</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kr>const</span> <span class=p>{</span> <span class=nx>getOptions</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;loader-utils&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(</span><span class=nx>source</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>options</span> <span class=o>=</span> <span class=nx>getOptions</span><span class=p>(</span><span class=k>this</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>mimetype</span> <span class=o>=</span> <span class=nx>options</span><span class=p>.</span><span class=nx>mimetype</span> <span class=o>||</span> <span class=s1>&#39;&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=sb>`export default </span><span class=si>${</span><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span><span class=sb>`data:</span><span class=si>${</span><span class=nx>mimetype</span><span class=si>}</span><span class=sb>;base64,</span><span class=si>${</span><span class=nx>source</span><span class=p>.</span><span class=nx>toString</span><span class=p>(</span><span class=s1>&#39;base64&#39;</span><span class=p>)</span><span class=si>}</span><span class=sb>`</span><span class=p>)</span><span class=si>}</span><span class=sb>`</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 开启 buffer 类型文件格式
+</span></span></span><span class=line><span class=cl><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span><span class=p>.</span><span class=nx>raw</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>webpack.config.js</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -130,27 +126,27 @@
 </span><span class=lnt>18
 </span><span class=lnt>19
 </span><span class=lnt>20
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=kr>const</span> <span class=nx>path</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;path&#39;</span><span class=p>);</span>
-
-<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
-  <span class=c1>//...
-</span><span class=c1></span>  <span class=nx>module</span><span class=o>:</span> <span class=p>{</span>
-    <span class=nx>rules</span><span class=o>:</span> <span class=p>[</span>
-      <span class=p>{</span>
-        <span class=nx>test</span><span class=o>:</span> <span class=sr>/\.png$/</span><span class=p>,</span>
-        <span class=nx>use</span><span class=o>:</span> <span class=p>[</span>
-          <span class=p>{</span>
-            <span class=nx>loader</span><span class=o>:</span> <span class=nx>path</span><span class=p>.</span><span class=nx>resolve</span><span class=p>(</span><span class=s1>&#39;./src/raw-loader.js&#39;</span><span class=p>),</span>
-            <span class=nx>options</span><span class=o>:</span> <span class=p>{</span>
-              <span class=nx>mimetype</span><span class=o>:</span> <span class=s1>&#39;image/png&#39;</span>
-            <span class=p>}</span>
-          <span class=p>}</span>
-        <span class=p>]</span>
-      <span class=p>}</span>
-    <span class=p>]</span>
-  <span class=p>},</span>
-<span class=p>};</span>
-</code></pre></td></tr></table></div></div><h2 id=pitch>pitch</h2><p><a href=https://www.webpackjs.com/api/loaders/#%E8%B6%8A%E8%BF%87-loader-pitching-loader- target=_blank rel="noopener noreffer">官网对 pitching loader 的介绍</a>：loader总是从右到左地被调用，有些情况下，loader 只关心 request 后面的元数据(metadata)，并且忽略前一个 loader 的结果。在实际（从右到左）执行 loader 之前，会先从左到右调用 loader 上的 pitch 方法。如果某个 loader 在 pitch 方法中返回一个结果，那么这个过程就会跳过剩下的 loader。这个关系<a href=https://zhuanlan.zhihu.com/p/104205895 target=_blank rel="noopener noreffer">引用两张图</a>可以看的很清晰<figure><img src=https://pic4.zhimg.com/80/v2-2c9ccd95160f8d6ad46b46e8a4f98b23_1440w.jpg></figure><figure><img src=https://pic4.zhimg.com/80/v2-3c1e7d5a31b68883576e2b6240c75f6f_1440w.jpg></figure>实例：实现一个简单的<code>style-loader</code>，<a href=https://github.com/JiangBao/webpack-notes/tree/main/loader/style target=_blank rel="noopener noreffer">github 仓库</a><br><code>css-loader</code> 会将css文件打包成字符串到js模块，我们自定义 <code>style-loader</code> 则需要通过操作 dom，将这份css代码转成 <code>style</code> 标签插入到 <code>html</code> 的 <code>head</code> 中。避免循环引用问题，需要在 pitch 方法上执行。<br><code>my-style-loader.js</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kr>const</span> <span class=nx>path</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;path&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>//...
+</span></span></span><span class=line><span class=cl>  <span class=nx>module</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>rules</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>test</span><span class=o>:</span> <span class=sr>/\.png$/</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>use</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>loader</span><span class=o>:</span> <span class=nx>path</span><span class=p>.</span><span class=nx>resolve</span><span class=p>(</span><span class=s1>&#39;./src/raw-loader.js&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nx>options</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>              <span class=nx>mimetype</span><span class=o>:</span> <span class=s1>&#39;image/png&#39;</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>]</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=pitch>pitch</h2><p><a href=https://www.webpackjs.com/api/loaders/#%E8%B6%8A%E8%BF%87-loader-pitching-loader->官网对 pitching loader 的介绍</a>：loader总是从右到左地被调用，有些情况下，loader 只关心 request 后面的元数据(metadata)，并且忽略前一个 loader 的结果。在实际（从右到左）执行 loader 之前，会先从左到右调用 loader 上的 pitch 方法。如果某个 loader 在 pitch 方法中返回一个结果，那么这个过程就会跳过剩下的 loader。这个关系<a href=https://zhuanlan.zhihu.com/p/104205895>引用两张图</a>可以看的很清晰<figure class=content-figure><button type=button class=figure-open data-lightbox-src=https://pic4.zhimg.com/80/v2-2c9ccd95160f8d6ad46b46e8a4f98b23_1440w.jpg data-lightbox-alt=文章配图 aria-label=放大图片：文章配图><img fetchpriority=low src=https://pic4.zhimg.com/80/v2-2c9ccd95160f8d6ad46b46e8a4f98b23_1440w.jpg alt=文章配图 loading=lazy decoding=async></button></figure><figure class=content-figure><button type=button class=figure-open data-lightbox-src=https://pic4.zhimg.com/80/v2-3c1e7d5a31b68883576e2b6240c75f6f_1440w.jpg data-lightbox-alt=文章配图 aria-label=放大图片：文章配图><img fetchpriority=low src=https://pic4.zhimg.com/80/v2-3c1e7d5a31b68883576e2b6240c75f6f_1440w.jpg alt=文章配图 loading=lazy decoding=async></button></figure>实例：实现一个简单的<code>style-loader</code>，<a href=https://github.com/JiangBao/webpack-notes/tree/main/loader/style>github 仓库</a><br><code>css-loader</code> 会将css文件打包成字符串到js模块，我们自定义 <code>style-loader</code> 则需要通过操作 dom，将这份css代码转成 <code>style</code> 标签插入到 <code>html</code> 的 <code>head</code> 中。避免循环引用问题，需要在 pitch 方法上执行。<br><code>my-style-loader.js</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -164,21 +160,21 @@
 </span><span class=lnt>12
 </span><span class=lnt>13
 </span><span class=lnt>14
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=kr>const</span> <span class=p>{</span> <span class=nx>stringifyRequest</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;loader-utils&#39;</span><span class=p>);</span>
-
-<span class=kd>function</span> <span class=nx>loader</span><span class=p>(</span><span class=nx>source</span><span class=p>)</span> <span class=p>{};</span>
-
-<span class=nx>loader</span><span class=p>.</span><span class=nx>pitch</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(</span><span class=nx>remainingRequest</span><span class=p>)</span> <span class=p>{</span>
-  <span class=k>return</span> <span class=sb>`
-</span><span class=sb>    let style = document.createElement(&#39;style&#39;);
-</span><span class=sb>    const content = require(</span><span class=si>${</span><span class=nx>stringifyRequest</span><span class=p>(</span><span class=k>this</span><span class=p>,</span> <span class=s1>&#39;!!&#39;</span> <span class=o>+</span> <span class=nx>remainingRequest</span><span class=p>)</span><span class=si>}</span><span class=sb>);
-</span><span class=sb>    style.innerHTML = content.default;
-</span><span class=sb>    document.head.appendChild(style);
-</span><span class=sb>  `</span><span class=p>;</span>
-<span class=p>}</span>
-
-<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=nx>loader</span><span class=p>;</span>
-</code></pre></td></tr></table></div></div><p><code>webpack.config.js</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kr>const</span> <span class=p>{</span> <span class=nx>stringifyRequest</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;loader-utils&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>function</span> <span class=nx>loader</span><span class=p>(</span><span class=nx>source</span><span class=p>)</span> <span class=p>{};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>loader</span><span class=p>.</span><span class=nx>pitch</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(</span><span class=nx>remainingRequest</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=sb>`
+</span></span></span><span class=line><span class=cl><span class=sb>    let style = document.createElement(&#39;style&#39;);
+</span></span></span><span class=line><span class=cl><span class=sb>    const content = require(</span><span class=si>${</span><span class=nx>stringifyRequest</span><span class=p>(</span><span class=k>this</span><span class=p>,</span> <span class=s1>&#39;!!&#39;</span> <span class=o>+</span> <span class=nx>remainingRequest</span><span class=p>)</span><span class=si>}</span><span class=sb>);
+</span></span></span><span class=line><span class=cl><span class=sb>    style.innerHTML = content.default;
+</span></span></span><span class=line><span class=cl><span class=sb>    document.head.appendChild(style);
+</span></span></span><span class=line><span class=cl><span class=sb>  `</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=nx>loader</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>webpack.config.js</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -194,21 +190,20 @@
 </span><span class=lnt>14
 </span><span class=lnt>15
 </span><span class=lnt>16
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=kr>const</span> <span class=nx>path</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;path&#39;</span><span class=p>);</span>
-
-<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
-  <span class=c1>//...
-</span><span class=c1></span>  <span class=nx>module</span><span class=o>:</span> <span class=p>{</span>
-    <span class=nx>rules</span><span class=o>:</span> <span class=p>[</span>
-      <span class=p>{</span>
-        <span class=nx>test</span><span class=o>:</span> <span class=sr>/\.css$/</span><span class=p>,</span>
-        <span class=nx>use</span><span class=o>:</span> <span class=p>[</span>
-          <span class=nx>path</span><span class=p>.</span><span class=nx>resolve</span><span class=p>(</span><span class=s1>&#39;./src/my-style-loader.js&#39;</span><span class=p>),</span>
-          <span class=s1>&#39;css-loader&#39;</span>
-        <span class=p>]</span>
-      <span class=p>}</span>
-    <span class=p>]</span>
-  <span class=p>},</span>
-<span class=p>};</span>
-</code></pre></td></tr></table></div></div><h2 id=参考>参考</h2><blockquote><p><a href=https://www.webpackjs.com/contribute/writing-a-loader/ target=_blank rel="noopener noreffer">编写一个 loader</a><br><a href=https://zhuanlan.zhihu.com/p/104205895 target=_blank rel="noopener noreffer">揭秘 webpack loader</a></p></blockquote></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>本文于 2020-07-23 更新</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/javascript/>JavaScript</a>,&nbsp;<a href=/tags/webpack/>webpack</a></section><section><span><a href=javascript:void(0); onclick=window.history.back();>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/%E6%B1%B4%E4%BA%AC%E4%B9%8B%E5%9B%B4/ class=prev rel=prev title=📖汴京之围><i class="fas fa-angle-left fa-fw"></i>📖汴京之围</a>
-<a href=/webpack-%E8%87%AA%E5%AE%9A%E4%B9%89plugin/ class=next rel=next title="Webpack - 自定义 plugin">Webpack - 自定义 plugin<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2017 - 2026</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://github.com/JiangBao target=_blank>酱鲍</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a rel="license external nofollow noopener noreffer" href=http://beian.miit.gov.cn/ target=_blank>浙ICP备20002824号</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i></a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/lib/lightgallery/lightgallery.min.css><style>.lg-toolbar .lg-icon::after{color:#999}</style><script type=text/javascript>window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":100},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/object-fit-images/ofi.min.js></script><script type=text/javascript src=/lib/lightgallery/lightgallery.min.js></script><script type=text/javascript src=/lib/lightgallery/lg-thumbnail.min.js></script><script type=text/javascript src=/lib/lightgallery/lg-zoom.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-TYXZ2Y2RHZ');</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-TYXZ2Y2RHZ" async></script></body></html>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kr>const</span> <span class=nx>path</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;path&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>//...
+</span></span></span><span class=line><span class=cl>  <span class=nx>module</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>rules</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>test</span><span class=o>:</span> <span class=sr>/\.css$/</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>use</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=nx>path</span><span class=p>.</span><span class=nx>resolve</span><span class=p>(</span><span class=s1>&#39;./src/my-style-loader.js&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=s1>&#39;css-loader&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=p>]</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=参考>参考</h2><blockquote><p><a href=https://www.webpackjs.com/contribute/writing-a-loader/>编写一个 loader</a><br><a href=https://zhuanlan.zhihu.com/p/104205895>揭秘 webpack loader</a></p></blockquote></div><aside class=article-toc aria-label=文章目录><span>目录</span><nav id=TableOfContents><ul><li><a href=#背景>背景</a></li><li><a href=#loader-使用>loader 使用</a></li><li><a href=#最简单的自定义-loader>最简单的自定义 loader</a></li><li><a href=#raw-模式>raw 模式</a></li><li><a href=#pitch>pitch</a></li><li><a href=#参考>参考</a></li></ul></nav></aside></div><footer class="article-footer shell"><a class=article-end href=/posts/>← 文章</a><nav class=article-tags aria-label=文章标签><a href=/tags/javascript/># JavaScript</a><a href=/tags/webpack/># webpack</a></nav></footer></article></main><footer class="site-footer shell"><span>© 2026 酱鲍</span></footer><dialog class=search-dialog data-search-dialog data-index-url=/index.json aria-label=搜索文章><div class=search-panel><div class=search-heading><strong>搜索</strong><button type=button data-search-close aria-label=关闭搜索>×</button></div><input type=search data-search-input placeholder=搜索文章、随记或标签 autocomplete=off aria-label=搜索关键词><div class=search-results data-search-results aria-live=polite><p class=search-message>输入关键词开始搜索。</p></div></div></dialog><script defer src=/js/site.min.c597f99a5e7f409496bacc997923d83ccefb910cf9a6afa22343d993b2e8acdf.js integrity="sha256-xZf5ml5/QJSWusyZeSPYPM77kQz5pq+iI0PZk7LorN8="></script></body></html>

@@ -1,5 +1,3 @@
-# 兴趣周刊(第 70 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/sky20240704.jpg" title="夏日的天空，抬头窗外就是风景">}}

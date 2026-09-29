@@ -1,5 +1,3 @@
-# 学点算法
-
 一些数据结构与算法相关的练习，详见[github仓库](https://github.com/JiangBao/leetcode-algorithm)
 
 <!--more-->

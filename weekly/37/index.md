@@ -1,5 +1,3 @@
-# 兴趣周刊(第 37 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/20221106.jpg" title="Sunday is coming...">}}
 <!--more-->
 

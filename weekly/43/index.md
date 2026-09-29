@@ -1,5 +1,3 @@
-# 兴趣周刊(第 43 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/happynewyear2023.png" title="新年快乐 🐰🐰🐰">}}
 <!--more-->
 

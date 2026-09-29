@@ -1,5 +1,3 @@
-# 兴趣周刊(第 12 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/1024_proudtobedevelopers.jpeg" title="1024 PROUD TO BE DEVELOPERS">}}

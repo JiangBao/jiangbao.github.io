@@ -1,5 +1,3 @@
-# 兴趣周刊(第 74 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/happynewyear2023.png" title="新年快乐 🐍🐍🐍">}}
@@ -32,11 +30,11 @@
 「[TikTok 停止在美服务](https://www.xinhuanet.com/fortune/20250119/56caf11042394069b50a971c6235e22e/c.html) 」北京时间 1 月 19 日，在美国官方定义的 TikTok 禁令生效时间之前一点，TikTok 主动停止了在美国的服务（准确来说应该是停止了所有 ByteDance 产品在 🇺🇸 的服务），用户打开应用的时候，会看到弹窗显示：「Sorry, TikTok isn't available right now...」。  
 「[TikTok 恢复再美服务](https://app.xinhuanet.com/news/article.html?articleId=6e0d1217ffb5a9846e5fbae23b7ef7cc)」北京时间 1 月 20 日，在下线不到 12 小时候，TikTok 发布声明已恢复相关服务，同时表示，将与特朗普一起寻找维持 TikTok 在美可用的长期解决方案。特朗普则表示要求美国企业拥有 TikTok 一半的所有权。  
 TT ban 的故事还没结束，不知道还有多少精彩好戏...
-<div style="display: flex;justify-content: center">
-{{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/ttban20250119.jpg" width="300">}}
+{{< gallery cols="2" label="TikTok 停服与恢复服务提示对比" >}}
+{{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/ttban20250119.jpg" width="300" alt="TikTok 停止服务提示">}}
 
-{{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/ttback20250120.jpg" width="300">}}
-</div>
+{{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/ttback20250120.jpg" width="300" alt="TikTok 恢复服务提示">}}
+{{< /gallery >}}
 
 * [从第一性原理聊聊新能源车和燃油车](https://www.xiaoyuzhoufm.com/episode/678d25565aa197472253f9bd)  
 代码时光机，本期不聊代码，邀请了清华科班生来聊汽车知识，从第一性原理出发，以能量转化的视角简单地拆解了一下电动汽车，以及它和燃油车的对比。如果你也对这个领域感兴趣，或许可以帮你补充上汽车相关知识的空白。

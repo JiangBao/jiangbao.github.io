@@ -1,5 +1,3 @@
-# 兴趣周刊(第 62 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/xinhuazidian.jpg" title="国家版本馆看到的各版本新华字典，哪本是你的回忆？">}}

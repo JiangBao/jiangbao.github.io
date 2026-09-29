@@ -1,5 +1,3 @@
-# Pixar 40th Anniversary
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/pixar40th.jpeg" title="Pixar 40 years">}}

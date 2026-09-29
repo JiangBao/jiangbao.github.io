@@ -1,5 +1,3 @@
-# 兴趣周刊(第 6 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/_113820629_index_treatments_976.png" title="希望全球疫情早日结束，任何地方，抗疫都不要成为政治博弈的手段">}}
 <!--more-->
 

@@ -1,5 +1,3 @@
-# 今日关于加密算法的一个问题
-
 <div align=center><img width=568 height=168 src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/encrypted-file-recovery.png" /></div>
 
 今天在接入一个 SDK 时，对方加密算发使用 `AES/ECB/PKCS5Padding`，不指定 `iv`，这边使用 Node.js 的后端服务器，结果遇到了加密结果与 java 不一致的问题，主要还是自己没仔细翻看官方文档的问题，记录一下。

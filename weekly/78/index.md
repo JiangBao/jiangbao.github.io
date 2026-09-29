@@ -1,5 +1,3 @@
-# 兴趣周刊(第 78 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/nuphykick75.jpg" title="新的工作伙伴">}}

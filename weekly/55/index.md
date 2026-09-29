@@ -1,5 +1,3 @@
-# 兴趣周刊(第 55 期)
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/202307summer05.jpg" title="夕阳无限好">}}

@@ -1,5 +1,3 @@
-# 女儿的祝福
-
 
 <!--more-->
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/wulinwaizhuan_birthday.jpeg">}}

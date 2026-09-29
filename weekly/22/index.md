@@ -1,5 +1,3 @@
-# 兴趣周刊(第 22 期)
-
 
 <!--more-->
 {{<figure src="https://www.apple.com/newsroom/images/product/mac/standard/Apple-Mac-Studio-Studio-Display-hero-220308_big.jpg.large.jpg" title="苹果推出全新 Mac Studio 和 Studio Display">}}

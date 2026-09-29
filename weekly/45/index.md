@@ -1,5 +1,3 @@
-# 兴趣周刊(第 45 期)
-
 {{<figure src="https://jiangbao-1258001083.cos.ap-shanghai.myqcloud.com/20230218-light.jpg" title="周末逛公园遇到的一束光">}}
 <!--more-->
 

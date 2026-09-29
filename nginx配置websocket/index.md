@@ -1,5 +1,3 @@
-# Nginx 配置 WebSocket
-
 
 <!--more-->
 
